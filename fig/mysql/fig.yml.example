@@ -1,0 +1,15 @@
+mysql:
+  image: mysql:latest
+  ports:
+   - 3306:3306
+  environment:
+   - MYSQL_ROOT_PASSWORD=qwerty1
+   - MYSQL_DATABASE=testdb
+   - MYSQL_USER=testuser
+   - MYSQL_PASSWORD=qwerty1
+   # Used in run command
+   - MYSQL_PORT_3306_TCP_ADDR=172.17.42.1
+   - MYSQL_PORT_3306_TCP_PORT=3306
+  volumes:
+   - ./data:/var/lib/mysql
+   - ./log:/var/log/mysql

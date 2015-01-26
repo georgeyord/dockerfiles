@@ -1,0 +1,4 @@
+webhelper:
+  image: dockerfile/nodejs-bower-grunt:latest
+  volumes:
+   - data:/data

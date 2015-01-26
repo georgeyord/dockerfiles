@@ -1,0 +1,6 @@
+rockmongo:
+  image: webts/rockmongo:latest
+  ports:
+   - 80:80
+  volumes:
+    - config.php:/var/www/html/config.php

@@ -1,0 +1,14 @@
+ngbp:
+  image: nginx:latest
+  ports:
+   - 80:80
+  environment:
+  # Used if you have an nginx proxypass server
+   - VIRTUAL_HOST=ngbp.local
+  volumes:
+  # Change to `data/bin` to check the compiled version of webapp
+   - data/build:/usr/local/nginx/html
+webhelper:
+  image: dockerfile/nodejs-bower-grunt:latest
+  volumes:
+   - data:/data
