@@ -1,0 +1,12 @@
+notebook:
+  image: ipython/notebook:latest
+  #ports:
+  # - 8888:8888
+  environment:
+  # Used if you have an nginx proxypass server
+   - VIRTUAL_HOST=notebook.mydocker.co
+   - PASSWORD=qwerty1
+   - PYTHONPATH=/notebooks
+  volumes:
+  # Change to the desired directory
+   - data:/notebooks
