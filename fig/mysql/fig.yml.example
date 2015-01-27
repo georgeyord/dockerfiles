@@ -1,8 +1,10 @@
 mysql:
   image: mysql:latest
-  ports:
-   - 3306:3306
+  #ports:
+  # - 3306:3306
   environment:
+  # Used if you have an nginx proxypass server
+  # - VIRTUAL_HOST=mysql.mydocker.co
    - MYSQL_ROOT_PASSWORD=qwerty1
    - MYSQL_DATABASE=testdb
    - MYSQL_USER=testuser

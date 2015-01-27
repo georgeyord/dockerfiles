@@ -1,11 +1,11 @@
 kibana:
   image: ianblenke/kibana-nginx:latest
-  ports:
+  #ports:
    # Nginx http
-   - 8005:80
+   #- 80:80
   environment:
   # Used if you have an nginx proxypass server
-   - VIRTUAL_HOST=kibana.mydocker.co
+  # - VIRTUAL_HOST=kibana.mydocker.co
    - HOST=kibana.local
    - SCHEME=https
    - USERNAME=admin
