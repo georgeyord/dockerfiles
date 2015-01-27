@@ -1,11 +1,11 @@
 mytq:
   image: paintedfox/nginx-php5:latest
-#  entrypoint: bash
-  ports:
-   - 80:80
-  environment:
+  #entrypoint: bash
+  #ports:
+  # - 80:80
+  #environment:
   # Used if you have an nginx proxypass server
-   - VIRTUAL_HOST=mytq.local
+   #- VIRTUAL_HOST=mytq.mydocker.co
   volumes:
    - data/mytq:/data
    - log/nginx:/var/log/nginx

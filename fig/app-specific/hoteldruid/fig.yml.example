@@ -1,10 +1,10 @@
 hoteldruid:
   image: paintedfox/nginx-php5:latest
-  ports:
-   - 80:80
-  environment:
+  #ports:
+  # - 80:80
+  #environment:
    # Used if you have an nginx proxypass server
-   - VIRTUAL_HOST=hoteldruid.local
+   #- VIRTUAL_HOST=hoteldruid.mydocker.co
   volumes:
    - data/hoteldruid:/data
    - log/nginx:/var/log/nginx
@@ -12,9 +12,9 @@ hoteldruid:
    - mysql
 mysql:
   image: mysql:latest
-  # not needed if you dont need access from host
-  ports:
-   - 3360:3306
+  # not needed if you don't need access from host
+  #ports:
+  # - 3360:3306
   environment:
    - MYSQL_ROOT_PASSWORD=qwerty1
    - MYSQL_DATABASE=hoteldruid
