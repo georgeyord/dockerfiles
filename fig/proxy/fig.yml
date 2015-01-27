@@ -1,0 +1,7 @@
+proxy:
+  image: jwilder/nginx-proxy:latest
+  ports:
+   - 80:80
+  volumes:
+   - /var/run/docker.sock:/tmp/docker.sock
+   - conf:/etc/nginx/sites-enabled

@@ -1,0 +1,4 @@
+# iPython Notebook related tmp files
+.ipynb_checkpoints
+*~
+*.bak
