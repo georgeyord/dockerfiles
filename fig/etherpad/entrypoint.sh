@@ -34,16 +34,16 @@ ETHERPAD_DB_HOST="${MYSQL_PORT_3306_TCP_ADDR}"
 ###########################################################
 # Wait for mysql server to start (max 120 seconds)
 DB_TIMEOUT=120
+DB_TIMEOUT_STEP=5
 echo "mysql -u${ETHERPAD_DB_USER} -p${ETHERPAD_DB_PASSWORD} -h${ETHERPAD_DB_HOST} --skip-column-names -e 'SELECT 1;'"
 while ! mysql -u${ETHERPAD_DB_USER} -p${ETHERPAD_DB_PASSWORD} -h${ETHERPAD_DB_HOST} --skip-column-names -e 'SELECT 1;' >/dev/null 2>&1
 do
-    DB_TIMEOUT=$(expr $DB_TIMEOUT - 1)
-    echo "Try to connect to MySQL ($DB_TIMEOUT retries left)."
+    DB_TIMEOUT=$(expr $DB_TIMEOUT - $DB_TIMEOUT_STEP)
     if [ $DB_TIMEOUT -eq 0 ]; then
         echo "Timeout error occurred trying to start MySQL Daemon."
         exit 1
     fi
-    sleep 1
+    sleep $DB_TIMEOUT_STEP
 done
 ###########################################################
 
