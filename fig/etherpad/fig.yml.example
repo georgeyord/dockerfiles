@@ -1,6 +1,6 @@
-# RUN `fig up` AGAIN IF FIRST TIME FAILS! THIS IS BECAUSE MYSQL CONTAINER TAKES SOME TIME TO WARM UP THE FIRST TIME
-etherpad:
-  image: tvelocity/etherpad-lite:latest
+etherpad
+  build: .
+#  image: tvelocity/etherpad-lite:latest
   #ports:
   # - 9001:9001
   environment:
