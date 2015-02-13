@@ -90,6 +90,18 @@ EOF
 
 fi
 
+if [ "$CODEPAD_ACTIVE" == 1 ]; then
+	echo 'Codepad is active'
+	cat << EOF >> settings.json
+  "ep_codepad": {
+    "project_path": "${CODEPAD_PROJECT_PATH}",
+    "log_path": "${CODEPAD_LOG_PATH}",
+    "play_url": "${CODEPAD_PLAY_URL}",
+    "push_action": "${CODEPAD_PUSH_ACTION}"
+  },
+EOF
+fi
+
 cat << EOF >> settings.json
 }
 EOF

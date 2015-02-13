@@ -3,8 +3,8 @@ Etherpad with MySql persistency in Docker container using [Fig](http://www.fig.s
 
 ## Features
  * Path to MySQL data is set to `./data/mysql` folder and can be changed in `fig.yml`
- * Nginx port isset by default to `9001` and can be changed in `fig.yml`
- * Nginx logs are persistent and accessible from host in `./log/mysql` folder
+ * Public port isset by default to `9001` and can be changed in `fig.yml`
+ * Logs are persistent and accessible from host in `./log/mysql` folder
 
 ## Commands
  * `fig up` to run both services in the foreground

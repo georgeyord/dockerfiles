@@ -1,6 +1,6 @@
 etherpad
-  build: .
-#  image: tvelocity/etherpad-lite:latest
+    build: .
+    #  image: tvelocity/etherpad-lite:latest
   #ports:
   # - 9001:9001
   environment:
@@ -20,8 +20,17 @@ etherpad
    - ETHERPAD_DB_PASSWORD=qwerty1
    # The mysql database to use. Defaults to etherpad. If the database is not available, it will be created when the container is launched
    - ETHERPAD_DB_NAME=etherpad_db
+   # Codepad related settings
+   - CODEPAD_ACTIVE=0
+   - CODEPAD_PROJECT_PATH=/codepad
+   - CODEPAD_LOG_PATH=/var/log
+   - CODEPAD_PLAY_URL=http://localhost
+   - CODEPAD_PUSH_ACTION=echo 'No push action'
   links:
    - mysql:mysql
+  volumes:
+   #- ./data/etherpad:/codepad
+   - ./data/upload:/opt/etherpad-lite/node_modules/ep_fileupload/upload
 mysql:
   image: mysql:latest
   # not needed if you dont need access from host
