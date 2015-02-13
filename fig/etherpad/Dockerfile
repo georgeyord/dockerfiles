@@ -106,7 +106,7 @@ RUN npm install ep_prompt_for_name
 
 # [Video and audio chat without plugins powered by WebRTC](https://github.com/bit/ep_webrtc)
 # Score: O/10 Didn't work
-RUN npm install ep_webrtc
+#RUN npm install ep_webrtc
 
 # [Search through all pads for a string in index page](https://www.npmjs.org/package/ep_search)
 # Score: 6/10 UI is of poor quality
