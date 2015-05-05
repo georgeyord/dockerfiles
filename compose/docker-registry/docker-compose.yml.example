@@ -1,0 +1,26 @@
+ui:
+  image: atcol/docker-registry-ui
+  ports:
+  - 5080:8080
+  environment:
+  # Used if you have an nginx proxypass server
+#   - VIRTUAL_HOST=dockerhub.mydocker.co
+   - REG1=http://registry:5000/v1/
+  volumes:
+   - data/h2:/var/lib/h2
+  links:
+   - registry:registry
+registry:
+  image: registry:latest
+  ports:
+  - 5000:5000
+  environment:
+  # Used if you have an nginx proxypass server
+#   - VIRTUAL_HOST=dockerhub.mydocker.co
+   - SETTINGS_FLAVOR=local
+   - STORAGE_PATH=/opt/registry
+   - SEARCH_BACKEND=sqlalchemy
+   - SQLALCHEMY_INDEX_DATABASE=sqlite:////sqlite/registry.db
+  volumes:
+   - data/registry:/opt/registry
+   - data/sqlite:/sqlite
