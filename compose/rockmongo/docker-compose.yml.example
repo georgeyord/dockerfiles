@@ -1,0 +1,9 @@
+rockmongo:
+  image: webts/rockmongo:latest
+  #ports:
+  # - 80:80
+  #environment:
+  # Used if you have an nginx proxypass server
+  # - VIRTUAL_HOST=rockmongo.mydocker.co
+  volumes:
+    - config.php:/var/www/html/config.php

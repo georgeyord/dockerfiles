@@ -1,0 +1,11 @@
+cadvisor:
+  image: google/cadvisor:latest
+  #ports:
+  # - 8080:8080
+  #environment:
+  # Used if you have an nginx proxypass server
+  # - VIRTUAL_HOST=cadvisor.mydocker.co
+  volumes:
+   - /var/run:/var/run:rw
+   - /sys:/sys:ro
+   - /var/lib/docker/:/var/lib/docker:ro
