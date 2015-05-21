@@ -1,4 +1,4 @@
-Helper for web applications built in a Docker container using [Fig](http://www.fig.sh)
+Helper for web applications built in a Docker container using docker-compose
 =====================================================
 
 ## Includes

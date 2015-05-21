@@ -8,7 +8,7 @@ wp:
    #- VIRTUAL_HOST=wp.mydocker.co
 #   - WORDPRESS_DB_HOST=
   volumes:
-#   - /opt/codebase/dockerfiles/fig/wordpress:/var/www/html
+#   - /opt/codebase/dockerfiles/docker-compose/wordpress:/var/www/html
    - data/wp:/var/www
    - log/nginx:/var/log/nginx
    - WORDPRESS_DB_NAME="wp_db"

@@ -1,9 +1,0 @@
-nginx:
-  image: nginx:latest
-  #ports:
-  # - 80:80
-  #environment:
-  # Used if you have an nginx proxypass server
-  # - VIRTUAL_HOST=nginx.mydocker.co
-  volumes:
-   - data:/usr/local/nginx/html

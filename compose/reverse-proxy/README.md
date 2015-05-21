@@ -1,8 +1,8 @@
-Nginx server used as Proxypass in Docker container using [Fig](http://www.fig.sh)
+Nginx server used as Proxypass in Docker container using docker-compose
 =====================================================
 
 ## Quick Start
- * `fig up -d` to run proxy in the background
+ * `docker-compose up -d` to run proxy in the background
  * Check the produced file in `conf/default`
 
 ## Features
@@ -10,6 +10,6 @@ Nginx server used as Proxypass in Docker container using [Fig](http://www.fig.sh
  * Nginx auto-created configuration file is persistent and accessible from host in `./conf/default` (don't edit, will be deleted when new nginx Docker containers run)
 
 ## Commands
- * `fig up` to run proxy in the foreground
- * `fig up -d` to run proxy in the background
- * `fig run proxy env` to check the internal environment variables
+ * `docker-compose up` to run proxy in the foreground
+ * `docker-compose up -d` to run proxy in the background
+ * `docker-compose run proxy env` to check the internal environment variables

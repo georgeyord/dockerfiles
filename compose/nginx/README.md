@@ -1,8 +1,8 @@
-Nginx server in Docker container using [Fig](http://www.fig.sh)
+Nginx server in Docker container using docker-compose
 =====================================================
 
 ## Quick Start
- * Run `fig up -d`
+ * Run `docker-compose up -d`
  * Check the webapp is running in localhost
 
 ## Features
@@ -10,6 +10,6 @@ Nginx server in Docker container using [Fig](http://www.fig.sh)
  * Nginx port isset by default to `80` and can be changed in `docker-compose.yml`
 
 ## Commands
- * `fig up` to run nginx server in the foreground
- * `fig up -d` to run nginx server in the background
- * `fig run nginx env` to check the internal environment variables
+ * `docker-compose up` to run nginx server in the foreground
+ * `docker-compose up -d` to run nginx server in the background
+ * `docker-compose run nginx env` to check the internal environment variables

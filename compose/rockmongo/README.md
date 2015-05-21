@@ -1,8 +1,8 @@
-Rockmongo web-client running in Docker container using [Fig](http://www.fig.sh)
+Rockmongo web-client running in Docker container using docker-compose
 =====================================================
 
 ## Quick Start
- * `fig up -d` to run proxy in the background
+ * `docker-compose up -d` to run proxy in the background
  * Check the webapp is running
 
 ## Features
@@ -10,5 +10,5 @@ Rockmongo web-client running in Docker container using [Fig](http://www.fig.sh)
  * WebUI server port isset by default to `80` and can be changed in `docker-compose.yml`
 
 ## Commands
- * `fig up -d` to run Rockmongo in the background
- * `fig run rockmongo env` to check the internal environment variables
+ * `docker-compose up -d` to run Rockmongo in the background
+ * `docker-compose run rockmongo env` to check the internal environment variables
