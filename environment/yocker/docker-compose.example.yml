@@ -1,0 +1,29 @@
+proxy:
+  extends:
+    file: ../../compose/reverse-proxy/docker-compose.yml
+    service: proxy
+
+cadvisor:
+  extends:
+    file: ../../compose/cadvisor/docker-compose.yml
+    service: cadvisor
+
+etherpad:
+  extends:
+    file: ../../compose/etherpad/docker-compose.yml
+    service: etherpad
+
+nginx:
+  extends:
+    file: ../../compose/nginx/docker-compose.yml
+    service: nginx
+
+notebook:
+  extends:
+    file: ../../compose/ipython-notebook/docker-compose.yml
+    service: notebook
+
+codebase:
+  extends:
+    file: ../../compose/ipython-notebook/docker-compose.code.yml
+    service: editor
