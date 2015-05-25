@@ -29,6 +29,7 @@ docker run -it --rm -e API_KEY=[API KEY] georgeyord/wego [DAYS] [PLACE]
 ```
 
 Where:
+
 * `API KEY` is the key you copied from worldweatheronline.com
 * `DAYS` is the number of days to forecast, 1-5. It is optional, default value is 3 days forecast.
 * `PLACE` is the place you want to know the weather, example London
