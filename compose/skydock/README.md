@@ -1,6 +1,7 @@
 # Skydock
 Automagic Service Discovery for Docker
 
-[Repository and information](https://github.com/crosbymichael/skydock)
+[Skydock](https://github.com/crosbymichael/skydock)
+[Skydns](https://github.com/crosbymichael/skydns)
 
-Use `curl 172.17.42.1:8008/skydns/services/` while skydns/skydock containers run to check which containers are registered.
+Use `curl 172.17.42.1:8080/skydns/services/` while skydns/skydock containers run to check which containers are registered.

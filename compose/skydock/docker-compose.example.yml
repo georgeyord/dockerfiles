@@ -1,0 +1,15 @@
+skydns:
+  image: crosbymichael/skydns:latest
+  command: -nameserver 8.8.8.8:53 -domain mydocker.co
+  ports:
+   - 8080:8080
+   - 172.17.42.1:53:53/udp
+  volumes:
+   - /var/run/docker.sock:/docker.sock
+skydock:
+  image: crosbymichael/skydock:latest
+  command: -s /docker.sock -ttl 30 -environment dev
+  volumes:
+   - /var/run/docker.sock:/docker.sock
+  links:
+   - skydns:skydns
