@@ -8,7 +8,7 @@ skydns:
    - /var/run/docker.sock:/docker.sock
 skydock:
   image: crosbymichael/skydock:latest
-  command: -s /docker.sock -ttl 30 -environment dev
+  command: -s /docker.sock -ttl 30  -domain mydocker.co -environment dev
   volumes:
    - /var/run/docker.sock:/docker.sock
   links:
