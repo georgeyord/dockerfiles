@@ -13,3 +13,9 @@ skydock:
    - /var/run/docker.sock:/docker.sock
   links:
    - skydns:skydns
+skydnsctl:
+  image: hamiltont/skydnsctl
+  environment:
+   - SKYDNS=http://skydns:8080
+  links:
+   - skydns:skydns
