@@ -14,4 +14,28 @@ registrator:
 balancer:
   image: aperepel/consul-template-balancer
   net: host
+  volumes:
+   - bin/haproxy.cfg.orig:/consul-template/haproxy.cfg.tmpl
+whoami:
+  image: jwilder/whoami
+  ports:
+   - :8000
+#  environment:
+#   - SERVICE_NAME=whoami.mydocker.co
+#   - SERVICE_TAGS=frontend_port:80
+whoareyou:
+  image: jwilder/whoami
+  ports:
+   - :8000
+#  environment:
+#   - SERVICE_ADDRESS=whoamiaddr.mydocker.co
+#   - SERVICE_NAME=whoami.mydocker.co
+#   - SERVICE_TAGS=frontend_port:80
+whoarethey:
+  image: jwilder/whoami
+  ports:
+   - :8000
+#  environment:
+#   - SERVICE_NAME=whoami.mydocker.co
+#   - SERVICE_TAGS=frontend_port:8080
 # docker run -it --rm -p :8000 -e SERVICE_NAME=web1 --name whoami2 jwilder/whoami

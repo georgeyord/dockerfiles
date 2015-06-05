@@ -1,0 +1,36 @@
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+# Haproxy admin
+listen stats 0.0.0.0:1936
+   stats enable
+   stats uri /haproxy
+   stats realm Haproxy\ Statistics
+   stats auth stats:stats
+
+frontend  http
+   bind *:80
+   option http-server-close
+   option forwardfor header X-Real-IP
+   use_backend web
+
+backend web
+  timeout connect 5000ms
+  timeout server  5000ms
+  balance roundrobin
+  {{range $tag, $services := services | byTag}}# {{$tag}}
+  {{range $services}}# {{.Name}}
+  {{range service .Name}}# {{.ID}}
+  server {{.Name}}_{{.Port}} {{.Address}}:{{.Port}} check
+  {{end}}
+  {{end}}
+  {{end}}
+
+  #########
+  {{range services}}{{range service .Name}}# {{.ID}}
+  server {{.Name}}_{{.Port}} {{.Address}}:{{.Port}} check
+  {{end}}
+  {{end}}

@@ -1,0 +1,20 @@
+# Registrator Original 
+type Service struct {
+    ID    string // <hostname>:<container-name>:<internal-port>[:udp if udp]
+    Name  string // <basename(container-image)>[-<internal-port> if >1 published ports]
+    Port  int    // <host-port>
+    IP    string // <host-ip> || <resolve(hostname)> if 0.0.0.0
+    Tags  []string             // empty, or includes 'udp' if udp
+    Attrs map[string]string    // any remaining service metadata from environment
+}
+
+# Yord
+type Service struct {
+    ID    string // <hostname>:<container-name>:<internal-port>[:udp if udp]
+    Name  string // <basename(container-image) OR VIRTUAL_HOST env>
+    FrontendPort  int // <FRONTEND_PORT>
+    Port  int    // <host-port>
+    IP    string // <host-ip> || <resolve(hostname)> if 0.0.0.0
+    Tags  []string             // empty, or includes 'udp' if udp
+    Attrs map[string]string    // any remaining service metadata from environment
+}
