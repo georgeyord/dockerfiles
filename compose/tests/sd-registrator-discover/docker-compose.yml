@@ -1,6 +1,7 @@
 # REGISTER
 registrator:
   image: georgeyord/registrator
+  command: etcd://etcd_host:4001/services
   links:
    - etcd:etcd_host
   volumes:
