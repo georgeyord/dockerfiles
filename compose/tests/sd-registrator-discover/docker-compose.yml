@@ -1,6 +1,6 @@
 # REGISTER
 registrator:
-  image: gliderlabs/registrator
+  image: georgeyord/registrator
   links:
    - etcd:etcd_host
   volumes:
@@ -31,7 +31,7 @@ etcdbrowser:
 
 # PROXIES
 discover:
-  image: jwilder/docker-discover
+  image: georgeyord/docker-discover
   # net: host
   environment:
    - ETCD_HOST=etcd_host:4001
