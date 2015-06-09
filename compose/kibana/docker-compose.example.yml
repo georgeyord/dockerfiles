@@ -4,8 +4,10 @@ kibana:
    # Nginx http
    #- 80:80
   environment:
-  # Used if you have an nginx proxypass server
-  # - VIRTUAL_HOST=kibana.mydocker.co
+   # Used for service discovery
+   #- SERVICE_80_FRONTEND_PORT=80
+   #- SERVICE_9200_FRONTEND_PORT=9200
+   #- SERVICE_NAME=kibana.mydocker.co
    - HOST=kibana.local
    - SCHEME=https
    - USERNAME=admin

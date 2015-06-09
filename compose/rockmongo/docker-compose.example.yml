@@ -3,7 +3,8 @@ rockmongo:
   #ports:
   # - 80:80
   #environment:
-  # Used if you have an nginx proxypass server
-  # - VIRTUAL_HOST=rockmongo.mydocker.co
+   # Used for service discovery
+   #- SERVICE_80_FRONTEND_PORT=80
+   #- SERVICE_NAME=rockmongo.mydocker.co
   volumes:
     - config.php:/var/www/html/config.php

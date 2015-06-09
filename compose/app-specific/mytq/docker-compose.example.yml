@@ -1,28 +1,30 @@
-hoteldruid:
+mytq:
   image: paintedfox/nginx-php5:latest
+  #entrypoint: bash
   #ports:
   # - 80:80
   #environment:
-   # Used if you have an nginx proxypass server
-   #- VIRTUAL_HOST=hoteldruid.mydocker.co
+   # Used for service discovery
+   #- SERVICE_80_FRONTEND_PORT=80
+   #- SERVICE_NAME=mytq.mydocker.co
   volumes:
-   - data/hoteldruid:/data
+   - data/mytq:/data
    - log/nginx:/var/log/nginx
   links:
    - mysql
 mysql:
   image: mysql:latest
-  # not needed if you don't need access from host
-  #ports:
-  # - 3360:3306
+  # not needed if you dont need access from host
+  ports:
+   - 3306:3306
   environment:
    - MYSQL_ROOT_PASSWORD=qwerty1
-   - MYSQL_DATABASE=hoteldruid
-   - MYSQL_USER=hoteldruid
-   - MYSQL_PASSWORD=qwerty1
+   - MYSQL_DATABASE=mytscore_db
+   - MYSQL_USER=mytscore_dbu
+   - MYSQL_PASSWORD=T3SY2jsy95rVXd
    # Used in run command
    - MYSQL_PORT_3306_TCP_ADDR=172.17.42.1
-   - MYSQL_PORT_3306_TCP_PORT=3360
+   - MYSQL_PORT_3306_TCP_PORT=3306
   volumes:
    - ./data/mysql:/var/lib/mysql
    - ./log/mysql:/var/log/mysql
