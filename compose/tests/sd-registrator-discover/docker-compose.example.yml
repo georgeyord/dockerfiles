@@ -34,8 +34,11 @@ discover:
   net: host
   environment:
    - ETCD_HOST=localhost:4001
+   - ADMIN_USER=stats
+   - ADMIN_PASSWORD=stats
    - SERVICE_IGNORED=1
   volumes:
+   - bin/templates:/app/haproxy/templates
    - bin/templates:/app/haproxy/templates
    - data/haproxy/config:/etc/haproxy
    - data/haproxy/log:/var/log/haproxy
