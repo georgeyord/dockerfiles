@@ -11,36 +11,33 @@ registrator:
 etcd:
   image: microbox/etcd
   command: -name etcd_host -data-dir /data
-#  ports:
-#   - 4001:4001
+  ports:
+   - 4001:4001
 #   - 7001:7001
 etcdinit:
   image: debian
-  command: sleep 15; curl -L http://etcd_host:4001/v2/keys/services -XPUT -d dir=true
+  command: sleep 10; curl -L http://etcd_host:4001/v2/keys/services -XPUT -d dir=true
   links:
    - etcd:etcd_host
 etcdbrowser:
   image: johnmccabe/etcd-browser
   environment:
    - ETCD_HOST=etcd_host
-   - SERVER_PORT=80
+   - SERVICE_FRONTEND_PORT=80
    - SERVICE_NAME=etcd.mydocker.co
-  ports:
-   - :14001
   links:
    - etcd:etcd_host
 
 # PROXIES
 discover:
   image: georgeyord/docker-discover
-  # net: host
+  net: host
   environment:
-   - ETCD_HOST=etcd_host:4001
-   - SERVICE_DISABLED=1
+   - ETCD_HOST=localhost:4001
+   - SERVICE_IGNORED=1
   volumes:
    - bin/templates:/app/haproxy/templates
    - data/haproxy/config:/etc/haproxy
-  links:
-   - etcd:etcd_host
+   - data/haproxy/log:/var/log/haproxy
   ports:
    - 1936:1936

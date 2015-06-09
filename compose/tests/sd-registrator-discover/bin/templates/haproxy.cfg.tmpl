@@ -14,7 +14,7 @@ defaults
     balance roundrobin
     option redispatch
 
-listen stats :1936
+listen stats-{{ now }} :1936
     mode http
     balance
     stats enable
@@ -37,8 +37,10 @@ listen stats :1936
     use_backend back-{{ port }}-{{ domain|replace('.','-') }} if host-{{ port }}-{{ domain|replace('.','-') }}
     {% if loop.index == 1 %}default_backend back-{{ port }}-{{ domain|replace('.','-') }}{% endif %}{% endfor %}
 
-{% for domain, servers in domains.iteritems() %}backend back-{{ port }}-{{ domain|replace('.','-') }}
+{% for domain, servers in domains.iteritems() %}
+backend back-{{ port }}-{{ domain|replace('.','-') }}
     {% for server in servers %}# Container {{server["ID"]}}
-    server {{ domain|replace('.','-') }}-{{ port }}-{{loop.index}} {{ server["addr"] }} inter 2s rise 3 fall 2{% endfor %}
+    server {{ domain|replace('.','-') }}-{{  server["addr"]|replace('.','-')|replace(':','-') }} {{ server["addr"] }} inter 2s rise 3 fall 2 check
+    {% endfor %}
     {% endfor %}
 {% endfor %}
