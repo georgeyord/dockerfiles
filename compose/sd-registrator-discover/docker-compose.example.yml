@@ -7,7 +7,7 @@ registrator:
   volumes:
    - /var/run/docker.sock:/tmp/docker.sock
 
-# INDEXES
+# STORAGE
 etcd:
   image: microbox/etcd
   command: -name etcd_host -data-dir /data
