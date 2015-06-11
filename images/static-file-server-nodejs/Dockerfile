@@ -5,6 +5,6 @@ RUN npm install -g node-static
 WORKDIR /static
 VOLUME /static
 
-EXPOSE 80
+EXPOSE 8080
 
-ENTRYPOINT ["static", "-p", "80"]
+ENTRYPOINT static --host-address 0.0.0.0 --gzip

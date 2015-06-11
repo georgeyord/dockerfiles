@@ -1,0 +1,1 @@
+Browsing of folder is not permitted
