@@ -1,0 +1,12 @@
+# https://github.com/tifayuki/docker-reverse-ssh-tunnel
+# https://registry.hub.docker.com/u/tifayuki/reverse-ssh-tunnel/
+
+reversessh:
+  image: tifayuki/reverse-ssh-tunnel
+  ports:
+   - 2200:22
+   - 1080:1080
+  environment:
+   - ROOT_PASS=qwerty123
+  # volumes:
+  #  - data/ssh:/root/.ssh
