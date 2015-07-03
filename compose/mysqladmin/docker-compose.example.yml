@@ -1,0 +1,18 @@
+phpmyadmin:
+  image: maxexcloo/phpmyadmin
+  ports:
+    - "13306:80"
+  external_links:
+   - [mysql container]:mysql
+  links:
+   - adminmysql:adminmysql
+  volumes:
+   - ./bin/config.inc.php:/data/http/config.inc.php
+
+adminmysql:
+  image: mysql:latest
+  environment:
+   - MYSQL_ROOT_PASSWORD=root
+  volumes:
+   - ./data/admin/mysql:/var/lib/mysql
+   - ./data/admin/log:/var/log/mysql
