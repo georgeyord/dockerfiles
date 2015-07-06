@@ -22,6 +22,10 @@ to `/etc/ssh/sshd_config` and restart ssh service
 ```
 leave this process running!
 
+> You can also use `connect-to-middleman.sh` script.
+> Usage: `connect-to-middleman.sh [middleman user] [middleman ip/domain name]`
+> Example: `connect-to-middleman.sh root examle.com`
+
 # Connect from client to destination
 ```
 [client]$ ssh middleman-user@middleman-public-ip
