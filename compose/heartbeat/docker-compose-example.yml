@@ -1,5 +1,5 @@
 heartbeat:
-  build: .
+  image: georgeyord/heartbeat
   environment:
    - HEARTBEAT_CYCLE=10
   volumes:
