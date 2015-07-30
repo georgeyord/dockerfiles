@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM debian
 
 MAINTAINER Giorgos Papaefthymiou <george.yord@gmail.com>
 
