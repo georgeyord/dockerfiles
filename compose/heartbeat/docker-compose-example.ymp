@@ -1,0 +1,6 @@
+heartbeat:
+  build: .
+  environment:
+   - HEARTBEAT_CYCLE=10
+  volumes:
+   - data/scripts:scripts

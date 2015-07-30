@@ -11,8 +11,10 @@ if [ -z "$2" ]; then
 fi
 
 if [ -z "$3" ]; then
-    echo "Using SSH port for destination server: 22."
-    $3=22
+    echo "SSH port for destination server: 22"
+    DEST_PORT=22
+else
+	DEST_PORT=$3
 fi
 
-ssh -R 2200:localhost:$3 $1@$2
+ssh -R 2200:localhost:$DEST_PORT $1@$2
