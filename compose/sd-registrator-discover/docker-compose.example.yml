@@ -19,12 +19,25 @@ etcdinit:
   command: sleep 10; curl -L http://etcd_host:4001/v2/keys/services -XPUT -d dir=true
   links:
    - etcd:etcd_host
+etcdbrowserproxy:
+  image: georgeyord/reverse-nginx
+  # ports:
+   # Internal port should match PUBLIC_PORT env variable
+   # - 80:80
+  environment:
+   - PUBLIC_PORT=80
+   - TARGET_PORT=8000
+   - SERVICE_80_FRONTEND_PORT=80
+   - SERVICE_NAME=etcd.mydocker.co
+  links:
+   - etcdbrowser:target
+  # volumes:
+  # Generate a htpasswd and enable the following line to have custom authentication
+  #  - data/htpasswd:/etc/nginx/conf.d/htpasswd:ro
 etcdbrowser:
   image: johnmccabe/etcd-browser
   environment:
    - ETCD_HOST=etcd_host
-   - SERVICE_8000_FRONTEND_PORT=80
-   - SERVICE_NAME=etcd.mydocker.co
   links:
    - etcd:etcd_host
 
