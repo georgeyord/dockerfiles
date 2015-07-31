@@ -1,4 +1,4 @@
-forwarder:
+proxy:
   image: georgeyord/reverse-nginx
   ports:
    # Internal port should match PUBLIC_PORT env variable
