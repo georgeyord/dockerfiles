@@ -29,6 +29,6 @@ do
 		eval $(cat $SCRIPTS_PATH/$FILE)
 		echo ""
 	done
-	echo "Sleep for ${HEARTBEAT_CYCLE}seconds... Press [CTRL+C] to stop.."
+	echo "Sleep for ${HEARTBEAT_CYCLE} seconds..."
 	sleep $HEARTBEAT_CYCLE
 done
