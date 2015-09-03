@@ -19,7 +19,7 @@ Wego is a weather client for the terminal. It uses worldweatheronline.com API to
 ![Screenshots](http://schachmat.github.io/wego/wego.gif)
 
 ## Usage
- 
+
 Wego requires an API key from worldweatheronline.com. Please register one [here](https://developer.worldweatheronline.com/auth/register).
 
 To run the container:
