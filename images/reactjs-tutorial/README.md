@@ -7,3 +7,5 @@ This is the [backend](https://github.com/reactjs/react-tutorial) of the React co
 ```
 docker run -it --rm -p 3000:3000 georgeyord/reactjs-tutorial
 ```
+
+and go to [http://localhost:3000](http://localhost:3000) to access it.
