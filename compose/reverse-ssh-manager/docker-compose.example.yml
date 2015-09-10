@@ -1,0 +1,28 @@
+reversesshpublic:
+  image: tifayuki/reverse-ssh-tunnel
+  ports:
+   - "2200:22"
+  environment:
+   - ROOT_PASS=test123
+  volumes:
+   - bin/run.sh:/run.sh
+reversesshdestination:
+  image: tifayuki/reverse-ssh-tunnel
+  net: "host"
+  environment:
+   - ROOT_PASS=test123
+   - PUBLIC_HOST_ADDR=yord.me
+   - PUBLIC_HOST_PORT=2200
+   - PROXY_PORT=22
+reversesshclient:
+  image: tifayuki/reverse-ssh-tunnel
+  command: /connect-through-middleman.sh
+  environment:
+    - ROOT_PASS=test123
+    - PUBLIC_USER=root
+    - PUBLIC_HOST_ADDR=yord.me
+    - PUBLIC_HOST_PORT=2200
+    - DESTINATION_USER=user
+    - PROXY_PORT=1080
+  volumes:
+    - bin/connect-through-middleman.sh:/connect-through-middleman.sh
