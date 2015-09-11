@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 
 RUN apt-get update && \
-    apt-get -y -f install \ 
+    apt-get -y -f install \
     openssh-server autossh pwgen sshpass && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists && \
@@ -13,16 +13,18 @@ RUN apt-get update && \
     echo "GatewayPorts yes" >> /etc/ssh/sshd_config && \
     rm -rf /var/lib/apt/lists/*
 
-ADD bin/init.sh /init.sh
-RUN chmod +x /init.sh
+ADD bin/run.sh /run.sh
+ADD bin/connect-directly-to-proxy.sh /connect-directly-to-proxy.sh
+ADD bin/connect-through-middleman.sh /connect-through-middleman.sh
+RUN chmod +x /*.sh
 
-#ENV AUTHORIZED_KEYS **None**
-#ENV ROOT_PASS **None**
-#ENV PUBLIC_HOST_ADDR **None**
-#ENV PUBLIC_HOST_PORT **None**
-#ENV PROXY_PORT **None**
+ENV AUTHORIZED_KEYS **None**
+ENV ROOT_PASS **None**
+ENV PUBLIC_HOST_ADDR **None**
+ENV PUBLIC_HOST_PORT **None**
+ENV PROXY_PORT **None**
 
 EXPOSE 22
-EXPOSE 80
+EXPOSE 1080
 
-CMD ["/init.sh"]
+CMD ["/run.sh"]

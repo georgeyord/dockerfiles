@@ -1,0 +1,43 @@
+reversesshpublic:
+  image: georgeyord/reverse-ssh-tunnel
+  ports:
+   - "2200:22"
+   # This could be a major security hole on the NATed destination machine since
+   # you expose its user access publicly without the intemediate layer of public machine
+   # USE IT WITH CAUTION
+   # - "2208:1080"
+  environment:
+   # Change root password to a really strong one and copy it unchnaged to all containers
+   - ROOT_PASS=test123
+reversesshdestination:
+  image: georgeyord/reverse-ssh-tunnel
+  net: "host"
+  environment:
+   - ROOT_PASS=test123
+   - PUBLIC_HOST_ADDR=example.com
+   - PUBLIC_HOST_PORT=2200
+   # The exposed SSH port on Destination machine
+   - PROXY_PORT=22
+reversesshclient:
+  image: georgeyord/reverse-ssh-tunnel
+  command: /connect-through-middleman.sh
+  environment:
+    - ROOT_PASS=test123
+    - PUBLIC_USER=root
+    - PUBLIC_HOST_ADDR=example.com
+    - PUBLIC_HOST_PORT=2200
+    - DESTINATION_USER=user
+    # The port on the public machine that will be forwarded to the destination
+    # port on the local side
+    - PROXY_PORT=1080
+# Use this container only if you public machine shares publicly the proxy port
+reversesshclientdirect:
+  image: georgeyord/reverse-ssh-tunnel
+  command: /connect-directly-to-proxy.sh
+  environment:
+   - PUBLIC_HOST_ADDR=example.com
+   - PUBLIC_HOST_PORT=2200
+   - DESTINATION_USER=user
+   # The port on the public machine that will be forwarded to the destination
+   # port on the local side
+   - PROXY_PORT=1080

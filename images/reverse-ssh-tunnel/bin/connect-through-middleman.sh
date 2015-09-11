@@ -10,8 +10,8 @@ if [ -z "$PUBLIC_HOST_ADDR" ]; then
   exit 1
 fi
 
-if [ -z "$PUBLIC_HOST_ADDR" ]; then
-  echo "PUBLIC_HOST_ADDR env variable should be set to the middleman's public port, eg. '22', exiting..."
+if [ -z "$PUBLIC_HOST_PORT" ]; then
+  echo "PUBLIC_HOST_PORT env variable should be set to the middleman's public port, eg. '22', exiting..."
   exit 1
 fi
 
