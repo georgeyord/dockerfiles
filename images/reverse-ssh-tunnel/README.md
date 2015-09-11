@@ -4,6 +4,7 @@
 
 The connections  we want to achieve is described here:
 ![SSH diagram](https://lh4.googleusercontent.com/aptJZFGs_mHtO7lrPWe4_WYwx8GQTx3Q8c4G8uoP223UGNq7PSyg4wntbRTykWs_1yOhlQo7sc260E0=w1892-h816-rw)
+[SSH diagram](https://lh4.googleusercontent.com/aptJZFGs_mHtO7lrPWe4_WYwx8GQTx3Q8c4G8uoP223UGNq7PSyg4wntbRTykWs_1yOhlQo7sc260E0=w1892-h816-rw)
 
 ## Usage (using `docker run`)
 
