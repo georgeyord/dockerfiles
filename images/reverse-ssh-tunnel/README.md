@@ -1,6 +1,8 @@
 # Reverse SSH tunnel
 
-> Reverse SSH is a technique that can be used to access systems (that are behind a firewall) from the outside world.
+**Reverse SSH is a technique that can be used to access systems (that are behind a firewall) from the outside world.**
+
+> Extension of tifayuki/reverse-ssh-tunnel container, all thanks go to him.
 
 The connections  we want to achieve is described here:
 ![SSH diagram](https://lh4.googleusercontent.com/aptJZFGs_mHtO7lrPWe4_WYwx8GQTx3Q8c4G8uoP223UGNq7PSyg4wntbRTykWs_1yOhlQo7sc260E0=w1892-h816-rw)
