@@ -16,6 +16,10 @@ if [ "${PROXY_PORT}" == "**None**" ]; then
     unset PROXY_PORT
 fi
 
+if [ "${DESTINATION_PORT}" == "**None**" ]; then
+    unset DESTINATION_PORT
+fi
+
 SetRootPass()
 {
     if [ -f /.root_pw_set ]; then
@@ -67,8 +71,8 @@ if [[ -n "${PUBLIC_HOST_ADDR}" && -n "${PUBLIC_HOST_PORT}" ]]; then
     echo "====REMOTE FINGERPRINT===="
 
     echo "=> Setting up the reverse ssh tunnel"
-    echo "sshpass -p ${ROOT_PASS} autossh -M 0 -NgR 1080:localhost:${PROXY_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT}"
-    sshpass -p ${ROOT_PASS} autossh -M 0 -NgR 1080:localhost:${PROXY_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT}
+    echo "sshpass -p ${ROOT_PASS} autossh -M 0 -NgR ${PROXY_PORT}:localhost:${DESTINATION_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT}"
+    sshpass -p ${ROOT_PASS} autossh -M 0 -NgR ${PROXY_PORT}:localhost:${DESTINATION_PORT} root@${PUBLIC_HOST_ADDR} -p ${PUBLIC_HOST_PORT}
 else
     echo "=> Running in public host mode"
     if [ ! -f /.root_pw_set ]; then

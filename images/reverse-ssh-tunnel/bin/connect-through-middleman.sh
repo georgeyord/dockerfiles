@@ -27,4 +27,6 @@ fi
 
 KNOWN_HOSTS="/root/.ssh/known_hosts"
 ssh-keyscan -p ${PUBLIC_HOST_PORT} -H ${PUBLIC_HOST_ADDR} > ${KNOWN_HOSTS}
+
+echo "Command to run: 'sshpass -p ${ROOT_PASS} ssh -t -p ${PUBLIC_HOST_PORT} root@${PUBLIC_HOST_ADDR} \"ssh ${DESTINATION_USER}@localhost -p ${PROXY_PORT}\"'"
 sshpass -p ${ROOT_PASS} ssh -t -p ${PUBLIC_HOST_PORT} root@${PUBLIC_HOST_ADDR} "ssh ${DESTINATION_USER}@localhost -p ${PROXY_PORT}"
