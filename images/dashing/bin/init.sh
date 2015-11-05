@@ -35,6 +35,14 @@ function install_gems() {
 ####### MAIN ########
 #####################
 
+# Install dashing if missing
+if [[ ! -e /dashboard/Gemfile ]]; then
+  CURRENT_PATH=`pwd`
+  cd /
+  dashing new dashing
+  cd "${CURRENT_PATH}"
+fi
+
 # Install dependencies
 if [[ ! -e /dashboard/installed.lock ]]; then
   install_widgets $WIDGETS
