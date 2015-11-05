@@ -36,7 +36,7 @@ function install_gems() {
 #####################
 
 # Install dashing if missing
-if [[ ! -e /dashboard/Gemfile ]]; then
+if [[ ! -e /dashing/Gemfile ]]; then
   CURRENT_PATH=`pwd`
   cd /
   gem install dashing && \
@@ -45,10 +45,10 @@ if [[ ! -e /dashboard/Gemfile ]]; then
 fi
 
 # Install dependencies
-if [[ ! -e /dashboard/installed.lock ]]; then
+if [[ ! -e /dashing/installed.lock ]]; then
   install_widgets $WIDGETS
   update_gemfile $GEMS
-  touch /dashboard/installed.lock
+  touch /dashing/installed.lock
 fi
 
 install_gems
