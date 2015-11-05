@@ -1,0 +1,16 @@
+dashing:
+  image: georgeyord/dashing
+  ports:
+   - 3030:3030
+  environment:
+   # Used for service discovery
+   - SERVICE_3030_FRONTEND_PORT=80
+   - SERVICE_NAME=dashing.local.mydocker.co
+   # DASHING OPTIONS
+   # To install custom widgets supply the gist IDs of the widgets
+  #  - WIDGETS=5641535
+   # To install gems, supply the gem name(s) as an environment variable
+   # Multiple gems and widgets can be supplied divided by spaces
+  #  - GEMS="nokogiri twitter"
+  volumes:
+    - ./data:/dashing
