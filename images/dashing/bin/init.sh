@@ -39,6 +39,7 @@ function install_gems() {
 if [[ ! -e /dashboard/Gemfile ]]; then
   CURRENT_PATH=`pwd`
   cd /
+  gem install dashing && \
   dashing new dashing
   cd "${CURRENT_PATH}"
 fi
