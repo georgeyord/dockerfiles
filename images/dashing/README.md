@@ -10,7 +10,7 @@ docker run -d -p 3030:3030 georgeyord/dashing
 
 And point your browser to [http://localhost:3030/](http://localhost:3030/).
 
-## Run custom dashing application and start tweeking
+## Run sample dashing application and start tweeking
 ```
 mkdir -p data
 docker run -d -p 3030:3030 -v `pwd`/data:/dashing georgeyord/dashing
