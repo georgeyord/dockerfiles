@@ -1,0 +1,30 @@
+etcd:
+  image: microbox/etcd
+  command: -name etcd_host -data-dir /data
+  ports:
+   - 4001:4001
+   - 7001:7001
+  volumes:
+   - ./data/etcd:/data
+etcdinit:
+  image: debian
+  command: sleep 5; curl -L http://127.0.0.1:4001/v2/keys/services -XPUT -d dir=true
+  links:
+   - etcd:etcd_host
+registrator:
+  image: gliderlabs/registrator 
+  command: etcd://etcd_host:4001/services
+  environment:
+   - HOST_IP=188.166.37.31
+  volumes:
+   - /var/run/docker.sock:/var/run/docker.sock
+  links:
+   - etcd:etcd_host
+browser:
+  image: johnmccabe/etcd-browser
+  environment:
+   - ETCD_HOST=etcd_host
+  ports:
+   - 8000:8000
+  links:
+   - etcd:etcd_host

@@ -1,0 +1,6 @@
+dindlight:
+  build: .
+  environment:
+   - BOX_NAME=dindbox
+  volumes:
+   - /var/run/docker.sock:/var/run/docker.sock

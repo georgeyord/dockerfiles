@@ -1,0 +1,13 @@
+mailcatcher:
+  image: schickling/mailcatcher:latest
+  # ports:
+  # - 1025:1025
+  # - 1080:1080
+  environment:
+   # Used for service discovery
+   - SERVICE_1025_FRONTEND_PORT=1025
+   - SERVICE_1080_FRONTEND_PORT=1080
+   - SERVICE_NAME=mailcatcher.mydocker.co
+  # volumes:
+  #  - ./data:/var/lib/mysql
+  #  - ./log:/var/log/mysql

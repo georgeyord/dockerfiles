@@ -1,0 +1,18 @@
+defaults
+   mode http
+   timeout client  5000ms
+
+frontend  http
+   bind *:80
+   option http-server-close
+   option forwardfor header X-Real-IP
+   use_backend web
+   stats enable
+   stats uri /haproxy
+
+backend web
+  timeout connect 5000ms
+  timeout server  5000ms
+  balance roundrobin
+  {{range service "web"}}
+  server {{.Name}}.{{.Port}} {{.Address}}:{{.Port}} check{{end}}
