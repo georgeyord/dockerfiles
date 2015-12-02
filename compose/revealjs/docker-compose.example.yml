@@ -1,0 +1,13 @@
+# https://registry.hub.docker.com/u/dordoka/reveal/
+revealjs:
+  image: dordoka/reveal:latest
+  #ports:
+  # - 8000:8000
+  # - 9000:9000
+  #environment:
+   # Used for service discovery
+   #- SERVICE_8000_FRONTEND_PORT=80
+   #- SERVICE_9000_FRONTEND_PORT=9000
+   #- SERVICE_NAME=present.mydocker.co
+  volumes:
+   - data:/home/reveal/presos
