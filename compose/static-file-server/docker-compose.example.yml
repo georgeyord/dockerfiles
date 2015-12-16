@@ -1,6 +1,10 @@
 # REGISTER
 server:
-  image: georgeyord/static-file-server-python
+  # You can use either of the 2 static servers
+  # Node static server runs `npm install` and `bower install` before serving
+  image: georgeyord/static-file-server-nodejs
+  # Python static server runs `pip install` before serving
+  # image: georgeyord/static-file-server-python:2/3
   #ports:
    #- 8080:80
   #environment:
