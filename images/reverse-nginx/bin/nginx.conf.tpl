@@ -1,32 +1,30 @@
-server {
-  listen       ${PUBLIC_PORT};
-  server_name  localhost;
+user  nginx;
+worker_processes  1;
+daemon off;
 
-  access_log /var/log/nginx/access.log;
-  error_log /var/log/nginx/error.log debug;
+error_log  /dev/stdout ${NGINX_ERROR_LEVEL};
+pid        /tmp/nginx.pid;
 
-  location ~ / {
-    auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/htpasswd;
+events {
+    worker_connections  1024;
+}
 
-    proxy_pass http://${TARGET_HOST}:${TARGET_PORT};
-    proxy_pass_request_headers on;
-    proxy_redirect     default;
-    proxy_set_header   Host             $http_host;
-    proxy_set_header   X-Real-IP        $remote_addr;
-    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-    proxy_max_temp_file_size 0;
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
 
-    #this is the maximum upload size
-    client_max_body_size       10m;
-    client_body_buffer_size    128k;
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
 
-    proxy_connect_timeout      90;
-    proxy_send_timeout         90;
-    proxy_read_timeout         90;
-    proxy_buffer_size          4k;
-    proxy_buffers              4 32k;
-    proxy_busy_buffers_size    64k;
-    proxy_temp_file_write_size 64k;
-  }
+    access_log  /dev/stdout  main;
+
+    #sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
 }
