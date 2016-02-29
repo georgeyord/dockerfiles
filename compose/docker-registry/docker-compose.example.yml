@@ -1,15 +1,17 @@
 ui:
   image: konradkleine/docker-registry-frontend
+  restart: always
   ports:
    #- 5080:8080
    # To enable SSL encryption
    - 443:443
   environment:
-   # Used for service discovery
-   - SERVICE_8080_FRONTEND_PORT=80
-   - SERVICE_NAME=ui.registry.local.mydocker.co
    - ENV_DOCKER_REGISTRY_HOST=registry
    - ENV_DOCKER_REGISTRY_PORT=5000
+   - ENV_USE_SSL=yes
+   # Used for service discovery
+  #  - SERVICE_8080_FRONTEND_PORT=80
+  #  - SERVICE_NAME=registryui.local.mydocker.co
   volumes:
    - ./data/h2:/var/lib/h2
    # To enable SSL encryption
@@ -22,13 +24,16 @@ registry:
   ports:
   - 5000:5000
   environment:
-   # Used for service discovery
-   #- SERVICE_5000_FRONTEND_PORT=5000
-   #- SERVICE_NAME=registry.mydocker.co
    - SETTINGS_FLAVOR=local
    - STORAGE_PATH=/opt/registry
    - SEARCH_BACKEND=sqlalchemy
    - SQLALCHEMY_INDEX_DATABASE=sqlite:////sqlite/registry.db
+   - MIRROR_SOURCE=https://registry-1.docker.io
+   - MIRROR_SOURCE_INDEX=https://index.docker.io
+   - MIRROR_TAGS_CACHE_TTL=172800
+   # Used for service discovery
+  #  - SERVICE_5000_FRONTEND_PORT=5000
+  #  - SERVICE_NAME=registry.mydocker.co
   volumes:
    - ./data/registry:/opt/registry
    - ./data/sqlite:/sqlite
