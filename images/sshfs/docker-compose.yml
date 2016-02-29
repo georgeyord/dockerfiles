@@ -1,0 +1,15 @@
+sshfs:
+  image: georgeyord/sshfs
+  # Uncomment if you need to ssh using a different user
+  # user: root
+  privileged: true
+  environment:
+    # Uncomment if you need to ssh using a different user
+    # - TARGET_USER=root
+    - TARGET_URL=example.com
+    # Uncomment if you need to ssh using a different port
+    # - TARGET_PORT=22
+    - TARGET_PATH=/shared
+  volumes:
+    - ~/.ssh:/root/.ssh
+    - ./data/remote:/remote
