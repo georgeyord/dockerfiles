@@ -1,0 +1,6 @@
+version: '2'
+services:
+  butterfly:
+    image: georgeyord/butterfly-web-terminal
+    build:
+      context: ./butterfly-web-terminal

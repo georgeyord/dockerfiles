@@ -1,0 +1,10 @@
+version: "2"
+services:
+  web_terminal:
+    extends:
+      file: ./services.yml
+      service: web_terminal
+    volumes:
+     - ~/.ssh:/root/.ssh
+    ports:
+      - 57575:57575
