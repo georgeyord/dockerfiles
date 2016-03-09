@@ -1,0 +1,27 @@
+version: "2"
+services:
+  proxy:
+    extends:
+      file: ./services.yml
+      service: proxy
+    # ports:
+      # Internal port should match PUBLIC_PORT env variable
+      # - 80:80
+      # - 443:443
+    environment:
+      - PUBLIC_PORT=80
+      # TARGET_HOST should match linked container internal name
+      - TARGET_HOST=example_host
+      - TARGET_PORT=8000
+      # Uncomment to activate https, remember to run once: 'docker run proxy' to create the SSL certificates
+      # - SSL_ACTIVE=1
+      # Uncomment to activate baic auth
+      # - HTPASSWD_USER=${BASIC_AUTH_USER}
+      # - HTPASSWD_PASSWORD=${BASIC_AUTH_PASSWORD}
+      # Uncomment to change nginx's error level
+      # - NGINX_ERROR_LEVEL=warn
+      # Used if you have serivice discovery service
+      # - SERVICE_80_FRONTEND_PORT=80
+      # - SERVICE_NAME=whoami.mydocker.co
+  example_host:
+   image: jwilder/whoami

@@ -1,0 +1,12 @@
+version: '2'
+services:
+  wp:
+    image: library/wordpress:latest
+    volumes:
+      - ./data/wp:/var/www
+      - ./log/nginx:/var/log/nginx
+  wp_mysql:
+    image: mysql:latest
+    volumes:
+     - ./data/mysql:/var/lib/mysql
+     - ./log/mysql:/var/log/mysql

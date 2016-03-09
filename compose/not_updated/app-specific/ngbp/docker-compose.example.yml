@@ -1,0 +1,15 @@
+ngbp:
+  image: nginx:latest
+  #ports:
+  # - 80:80
+  #environment:
+   # Used in service discovery
+   #- SERVICE_80_FRONTEND_PORT=80
+   #- SERVICE_NAME=ngbp.mydocker.co
+  volumes:
+  # Change to `data/bin` to check the compiled version of webapp
+   - data/build:/usr/local/nginx/html
+webhelper:
+  image: dockerfile/nodejs-bower-grunt:latest
+  volumes:
+   - data:/data

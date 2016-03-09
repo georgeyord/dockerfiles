@@ -1,0 +1,6 @@
+version: "2"
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+     - ./data:/usr/local/nginx/html

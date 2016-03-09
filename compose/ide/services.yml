@@ -1,0 +1,6 @@
+version: '2'
+services:
+  ide:
+    image: sapk/cloud9
+    volumes:
+      - ./data/workspace:/workspace

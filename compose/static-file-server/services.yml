@@ -1,0 +1,18 @@
+version: '2'
+services:
+  # You can use either of the 3 static servers
+  nodejs:
+    # Node static server runs `npm install` and `bower install` before serving
+    image: georgeyord/static-file-server-nodejs
+    volumes:
+     - data:/static:ro
+  python2:
+    # Python static server runs `pip install` before serving
+    image: georgeyord/static-file-server-python:2
+    volumes:
+     - data:/static:ro
+  python3:
+    # Python static server runs `pip install` before serving
+    image: georgeyord/static-file-server-python:3
+    volumes:
+     - data:/static:ro

@@ -1,0 +1,7 @@
+version: '2'
+services:
+  github_pages:
+    image: starefossen/github-pages
+    volumes:
+      # Change to the desired directory
+      - ./data:/usr/app/src

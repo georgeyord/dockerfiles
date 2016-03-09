@@ -1,0 +1,12 @@
+version: "2"
+services:
+  nginx:
+    extends:
+      file: ./services.yml
+      service: nginx
+    # ports:
+    #   - 80:80
+    # environment:
+      # Used in service discovery
+      # - SERVICE_80_FRONTEND_PORT=80
+      # - SERVICE_NAME=nginx.mydocker.co

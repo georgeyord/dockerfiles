@@ -1,0 +1,8 @@
+version: '2'
+services:
+  heartbeat:
+    extends:
+      file: ./services.yml
+      service: heartbeat
+    environment:
+     - HEARTBEAT_CYCLE=10

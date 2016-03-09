@@ -1,1 +1,3 @@
-data/scripts
+docker-compose.override.yml
+data
+log

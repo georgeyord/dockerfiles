@@ -1,0 +1,16 @@
+version: '2'
+services:
+  ipython_notebook:
+    extends:
+      file: ./services.yml
+      service: ipython_notebook
+    # ports:
+    #   - 8888:8888
+    # environment:
+      # Used in service discovery
+      # - SERVICE_8888_FRONTEND_PORT=80
+      # - SERVICE_NAME=notebook.mydocker.co
+      # - PASSWORD=${BASIC_AUTH_PASSWORD}
+    # volumes:
+      # Change to the desired directory
+      # - data:/notebooks

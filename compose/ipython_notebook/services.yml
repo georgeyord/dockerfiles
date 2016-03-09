@@ -1,0 +1,6 @@
+services:
+  ipython_notebook:
+    image: ipython/notebook:latest
+    volumes:
+      # Change to the desired directory
+      - data:/notebooks

@@ -1,0 +1,19 @@
+version: "2"
+services:
+  consul_glitter:
+    image: gliderlabs/consul
+    volumes:
+      - ./data/consul:/var/consul
+  registrator :
+    image: gliderlabs/registrator
+  net_tools:
+    image: joffotron/docker-net-tools
+  consul_progrium:
+    image: progrium/consul
+    command: "-server -bootstrap-expect 3 -ui-dir /ui"
+  consul_1:
+    image: progrium/consul
+    command: "-server -join consul_master"
+  consul_2:
+    image: progrium/consul
+    command: "-server -join consul_master"

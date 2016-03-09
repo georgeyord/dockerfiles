@@ -1,0 +1,44 @@
+version: "2"
+services:
+  # REGISTER
+  registrator:
+    image: georgeyord/registrator
+    command: etcd://etcd_host:4001/services
+    volumes:
+     - /var/run/docker.sock:/tmp/docker.sock
+
+  # STORAGE
+  etcd:
+    image: microbox/etcd
+    command: -name etcd -data-dir /data
+  etcd_init:
+    image: appropriate/curl
+    command: curl -L http://etcd:4001/v2/keys/services -XPUT -d dir=true
+  etcd_proxy:
+    image: georgeyord/reverse-nginx
+    volumes:
+     - ./data/proxy/ssl:/etc/nginx/ssl
+     - ./data/proxy/conf.d:/etc/nginx/conf.d/
+    environment:
+      # - PUBLIC_HOST=80
+      - PUBLIC_PORT=80
+      # TARGET_HOST should match linked container internal name
+      - TARGET_HOST=etcd_ui
+      - TARGET_PORT=8000
+  etcd_ui:
+    image: johnmccabe/etcd-browser
+    environment:
+     - ETCD_HOST=etcd
+  net_tools:
+    image: joffotron/docker-net-tools
+
+  # PROXIES
+  discover:
+    image: georgeyord/docker-discover
+    volumes:
+     - ./bin/templates:/app/haproxy/templates
+     - ./data/haproxy/config:/etc/haproxy
+     - ./data/haproxy/log:/var/log/haproxy
+    environment:
+     - ETCD_HOST=etcd:4001
+     - SERVICE_IGNORED=1

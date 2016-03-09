@@ -1,0 +1,62 @@
+# REGISTER
+registrator:
+  image: georgeyord/registrator
+  command: etcd://etcd_host:4001/services
+  links:
+   - etcd:etcd_host
+  volumes:
+   - /var/run/docker.sock:/tmp/docker.sock
+
+# STORAGE
+etcd:
+  image: microbox/etcd
+  command: -name etcd_host -data-dir /data
+  ports:
+   - 4001:4001
+#   - 7001:7001
+etcdinit:
+  image: debian
+  command: sleep 10; curl -L http://etcd_host:4001/v2/keys/services -XPUT -d dir=true
+  links:
+   - etcd:etcd_host
+proxy:
+  image: georgeyord/reverse-nginx
+  volumes:
+   - ./data/proxy/ssl:/etc/nginx/ssl
+   - ./data/proxy/conf.d:/etc/nginx/conf.d/
+  environment:
+    # - PUBLIC_HOST=80
+    - PUBLIC_PORT=80
+    # TARGET_HOST should match linked container internal name
+    - TARGET_HOST=etcd_ui
+    - TARGET_PORT=8000
+    # Uncomment to activate baic auth
+    - HTPASSWD_USER=${BASIC_AUTH_USER}
+    - HTPASSWD_PASSWORD=${BASIC_AUTH_PASSWORD}
+    # Used if you have serivice discovery service
+    - SERVICE_80_FRONTEND_PORT=80
+    - SERVICE_NAME=etcd.mydocker.co
+  links:
+   - etcdbrowser:etcd_ui
+etcdbrowser:
+  image: johnmccabe/etcd-browser
+  environment:
+   - ETCD_HOST=etcd_host
+  links:
+   - etcd:etcd_host
+
+# PROXIES
+discover:
+  image: georgeyord/docker-discover
+  net: host
+  environment:
+   - ETCD_HOST=localhost:4001
+   - ADMIN_USER=stats
+   - ADMIN_PASSWORD=stats
+   - SERVICE_IGNORED=1
+  volumes:
+   - ./bin/templates:/app/haproxy/templates
+   - ./data/haproxy/config:/etc/haproxy
+   - ./data/haproxy/log:/var/log/haproxy
+  ports:
+   - 1936:1936

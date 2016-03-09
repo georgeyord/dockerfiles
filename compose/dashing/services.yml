@@ -1,0 +1,6 @@
+version: '2'
+services:
+  dashing:
+   image: georgeyord/dashing
+   volumes:
+     - ./data:/dashing

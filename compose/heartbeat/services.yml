@@ -1,0 +1,6 @@
+version: '2'
+services:
+  heartbeat:
+    image: georgeyord/heartbeat
+    volumes:
+     - ./data/scripts:/scripts

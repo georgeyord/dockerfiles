@@ -1,5 +1,3 @@
-fig.yml
-docker-compose.yml
+docker-compose.override.yml
 data
 log
-

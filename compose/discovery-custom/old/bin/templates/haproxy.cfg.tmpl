@@ -1,0 +1,46 @@
+global
+    daemon
+    maxconn 4096
+    pidfile /var/run/haproxy.pid
+
+defaults
+    mode http
+    option forwardfor
+
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+    balance roundrobin
+    option redispatch
+
+listen stats-{{ now }} :1936
+    mode http
+    balance
+    stats enable
+    stats realm Haproxy\ Statistics
+    #This is the virtual URL to access the stats page
+    stats uri /haproxy
+    #Authentication realm. This can be set to anything. Escape space characters with a backslash.
+    stats realm HAProxy\ Statistics
+    #The user/pass you want to use. Change this password!
+    stats auth {{ admin_user }}:{{ admin_password }}
+    #This allows you to take down and bring up back end servers.
+    #This will produce an error on older versions of HAProxy.
+    stats admin if TRUE
+
+{% for port, domains in services.iteritems() %}frontend front-{{ port }}
+    bind *:{{ port }}
+    {% for domain, servers in domains.iteritems() %}
+    acl host-{{ port }}-{{ domain|replace('.','-') }} hdr(host) -i {{domain}}{% endfor %}
+    {% for domain, servers in domains.iteritems() %}
+    use_backend back-{{ port }}-{{ domain|replace('.','-') }} if host-{{ port }}-{{ domain|replace('.','-') }}
+    {% if loop.index == 1 %}default_backend back-{{ port }}-{{ domain|replace('.','-') }}{% endif %}{% endfor %}
+
+{% for domain, servers in domains.iteritems() %}
+backend back-{{ port }}-{{ domain|replace('.','-') }}
+    {% for server in servers %}# Container {{server["ID"]}}
+    server {{ domain|replace('.','-') }}-{{  server["addr"]|replace('.','-')|replace(':','-') }} {{ server["addr"] }} inter 2s rise 3 fall 2 check
+    {% endfor %}
+    {% endfor %}
+{% endfor %}

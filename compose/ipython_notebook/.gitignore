@@ -1,3 +1,4 @@
 docker-compose.override.yml
+docker-compose.*.yml
 data
 log
