@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM python:3
 
 RUN apt-get update --quiet > /dev/null && \
   apt-get install --assume-yes --force-yes -qq \

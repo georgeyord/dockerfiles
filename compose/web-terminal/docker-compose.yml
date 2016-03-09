@@ -7,4 +7,4 @@ services:
     volumes:
      - ~/.ssh:/root/.ssh
     ports:
-      - 57575:57575
+      - 2233:2233
