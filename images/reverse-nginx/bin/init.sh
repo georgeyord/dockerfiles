@@ -14,11 +14,11 @@ else
 		else
 		   echo -e  "SSL files not found, let's generate them.\n\nYOU MUST RUN DOCKER IN INTERACTIVE MODE TO SET THIS UP, HIT CTRL+C TO EXIT IF IN DEAMON MODE..."
 		   mkdir -p $SSL_CERT_PATH
-			 cd $SSL_CERT_PATH
+       cd $SSL_CERT_PATH
 		   openssl genrsa 2048 > nginx.key
 		   openssl req -new -x509 -nodes -sha1 -days 3650 -key nginx.key > nginx.crt
 		   echo "SSL files were created, exiting to start in deamon mode..."
-			 exit 0
+       exit 0
 		fi
 
 		echo -e "Https activated"
@@ -29,11 +29,24 @@ else
 		export SSL_PLACEHOLDER=''
 	fi
 
+	if [ -n "$WEBSOCKER_ACTIVE" ]; then
+		echo -e "Websocket support activated"
+		export WEBSOCKET_PLACEHOLDER='
+			# WebSocket
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+			'
+	else
+		export WEBSOCKET_PLACEHOLDER=''
+	fi
+
 	if [ -n "$HTPASSWD_PASSWORD" ]; then
 		echo -e "Basic authentication activated\nUsername: ${HTPASSWD_USER}\nPassword: ${HTPASSWD_PASSWORD}"
 		htpasswd -b -c ${HTPASSWD_PATH} ${HTPASSWD_USER} ${HTPASSWD_PASSWORD}
   	export HTPASSWD_PLACEHOLDER="auth_basic \"Restricted\";
-    auth_basic_user_file ${HTPASSWD_PATH};"
+    auth_basic_user_file ${HTPASSWD_PATH};
+		"
 		echo $HTPASSWD_PLACEHOLDER
 	else
 		export HTPASSWD_PLACEHOLDER=''
@@ -41,7 +54,7 @@ else
 
   # Finalize default.conf using enviromental variables
 	envsubst '$NGINX_ERROR_LEVEL' < /templates/nginx.conf.tpl > /etc/nginx/nginx.conf
-  envsubst '$PUBLIC_HOST,$PUBLIC_PORT,$TARGET_HOST,$TARGET_PORT,$SSL_PLACEHOLDER,$HTPASSWD_PLACEHOLDER' < /templates/default.conf.tpl > /etc/nginx/conf.d/default.conf
+  envsubst '$PUBLIC_HOST,$PUBLIC_PORT,$TARGET_HOST,$TARGET_PORT,$SSL_PLACEHOLDER,$HTPASSWD_PLACEHOLDER,$WEBSOCKET_PLACEHOLDER' < /templates/default.conf.tpl > /etc/nginx/conf.d/default.conf
 
 	echo -e "\n\nNginx configuration file:"
 	cat /etc/nginx/nginx.conf

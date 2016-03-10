@@ -7,8 +7,8 @@ RUN apt-get update --quiet > /dev/null && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN pip install butterfly
-RUN pip install libsass
+RUN pip install butterfly && \
+    pip install libsass
 
 ENV PASSWORD=root
 

@@ -9,6 +9,7 @@ server {
 
   location ~ / {
     ${HTPASSWD_PLACEHOLDER}
+    ${WEBSOCKET_PLACEHOLDER}
 
     proxy_pass http://${TARGET_HOST}:${TARGET_PORT};
     proxy_pass_request_headers on;

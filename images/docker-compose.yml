@@ -4,3 +4,51 @@ services:
     image: georgeyord/butterfly-web-terminal
     build:
       context: ./butterfly-web-terminal
+  cloud9:
+    image: georgeyord/cloud9
+    build:
+      context: ./cloud9
+  dashing:
+    image: georgeyord/dashing
+    build:
+      context: ./dashing
+  heartbeat:
+    image: georgeyord/heartbeat
+    build:
+      context: ./heartbeat
+  raml-abao:
+    image: georgeyord/raml-abao-automated-testing
+    build:
+      context: ./raml-abao-automated-testing
+  raml-osprey:
+    image: georgeyord/raml-osprey-mock-service
+    build:
+      context: ./raml-osprey-mock-service
+  reverse-nginx:
+    image: georgeyord/reverse-nginx
+    build:
+      context: ./reverse-nginx
+  reverse-ssh-tunnel:
+    image: georgeyord/reverse-ssh-tunnel
+    build:
+      context: ./reverse-ssh-tunnel
+  skype-bot:
+    image: georgeyord/skype-bot
+    build:
+      context: ./skype-bot
+  sshfs:
+    image: georgeyord/sshfs
+    build:
+      context: ./sshfs
+  static-file-server-nodejs:
+    image: georgeyord/static-file-server-nodejs
+    build:
+      context: ./static-file-server-nodejs
+  varnish-with-vagent:
+    image: georgeyord/varnish-with-vagent
+    build:
+      context: ./varnish-with-vagent
+  wego:
+    image: georgeyord/wego
+    build:
+      context: ./wego
