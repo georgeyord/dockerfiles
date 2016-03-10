@@ -1,10 +1,37 @@
-version: "2"
+version: '2'
 services:
-  web_terminal:
+  butterfly_proxy:
     extends:
       file: ./services.yml
-      service: web_terminal
+      service: butterfly_proxy
+    # ports:
+      # Internal port should match PUBLIC_PORT env variable
+      # - 80:80
+      # - 443:443
+    environment:
+      - PUBLIC_PORT=80
+      # TARGET_HOST should match linked container internal name
+      - TARGET_HOST=butterfly
+      - TARGET_PORT=2233
+      # Uncomment to activate https, remember to run once: 'docker run proxy' to create the SSL certificates
+      - SSL_ACTIVE=1
+      # Uncomment to activate wobsocket
+      - WEBSOCKER_ACTIVE=1
+      # Uncomment to activate basic auth
+      - HTPASSWD_USER=${BASIC_AUTH_USER}
+      - HTPASSWD_PASSWORD=${BASIC_AUTH_PASSWORD}
+      # Used if you have serivice discovery service
+      # - SERVICE_80_FRONTEND_PORT=80
+      # - SERVICE_443_FRONTEND_PORT=443
+      # - SERVICE_NAME=terminal.mydocker.co
+  butterfly:
+    extends:
+      file: ./services.yml
+      service: butterfly
+    # ports:
+    #   - 2233:2233
     volumes:
-     - ~/.ssh:/root/.ssh
-    ports:
-      - 2233:2233
+      - ~/.ssh:/root/.ssh:ro
+    environment:
+      # Used if you have serivice discovery service
+      - PASSWORD=${BASIC_AUTH_PASSWORD}

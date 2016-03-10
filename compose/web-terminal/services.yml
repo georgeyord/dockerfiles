@@ -1,4 +1,9 @@
 version: "2"
 services:
-  web_terminal:
-    image:  georgeyord/butterfly-web-terminal
+  butterfly_proxy:
+    image: georgeyord/reverse-nginx
+    volumes:
+     - ./data/ssl:/etc/nginx/ssl
+     - ./data/conf.d:/etc/nginx/conf.d/
+  butterfly:
+    image: "georgeyord/butterfly-web-terminal:latest"
