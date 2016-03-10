@@ -1,0 +1,6 @@
+varnish:
+  image: georgeyord/vagrant-with-vagent
+  hostname: vagent2
+  ports:
+    - "6085:6085"
+    - "6081:6081"
