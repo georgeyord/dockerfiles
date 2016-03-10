@@ -1,5 +1,6 @@
 version: '2'
 services:
+  ## CADVISOR ##
   cadvisor:
     extends:
       file: ../../compose/cadvisor/services.yml
@@ -10,6 +11,7 @@ services:
       # Used if you have serivice discovery service
       - SERVICE_8080_FRONTEND_PORT=80
       - SERVICE_NAME=cadvisor.mydocker.co
+  ## IDE ##
   ide:
     extends:
       file: ../../compose/ide/services.yml
@@ -23,6 +25,7 @@ services:
       - SERVICE_NAME=ide.mydocker.co
     volumes:
       - /root/codebase:/workspace
+  ## STATIC SITE ##
   nginx:
     extends:
       file: ../../compose/nginx/services.yml
@@ -33,6 +36,43 @@ services:
       # Used in service discovery
       - SERVICE_80_FRONTEND_PORT=80
       - SERVICE_NAME=nginx.mydocker.co
+  ## BUTTERFLY ##
+  butterfly_proxy:
+    extends:
+      file: ../../compose/butterfly/services.yml
+      service: butterfly_proxy
+    ports:
+      # Internal port should match PUBLIC_PORT env variable
+      # - 80:80
+      - 443:443
+    environment:
+      - PUBLIC_PORT=80
+      # TARGET_HOST should match linked container internal name
+      - TARGET_HOST=butterfly
+      - TARGET_PORT=2233
+      # Uncomment to activate https, remember to run once: 'docker run proxy' to create the SSL certificates
+      - SSL_ACTIVE=1
+      # Uncomment to activate wobsocket
+      - WEBSOCKER_ACTIVE=1
+      # Uncomment to activate basic auth
+      - HTPASSWD_USER=${BASIC_AUTH_USER}
+      - HTPASSWD_PASSWORD=${BASIC_AUTH_PASSWORD}
+      # Used if you have serivice discovery service
+      - SERVICE_80_FRONTEND_PORT=80
+      - SERVICE_443_FRONTEND_PORT=443
+      - SERVICE_NAME=terminal.mydocker.co
+  butterfly:
+    extends:
+      file: ../../compose/butterfly/services.yml
+      service: butterfly
+    # ports:
+    #   - 2233:2233
+    volumes:
+      - ~/.ssh:/root/.ssh:ro
+    environment:
+      # Used if you have serivice discovery service
+      - PASSWORD=${BASIC_AUTH_PASSWORD}
+    ## REGISTRY ##
   # registry_ui:
   #   extends:
   #     file: ../../compose/docker-registry/services.yml
