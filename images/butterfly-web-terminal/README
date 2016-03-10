@@ -1,3 +1,33 @@
-[Kudos](https://en.wikipedia.org/wiki/Kudos) to [garland/butterfly](https://hub.docker.com/r/garland/butterfly/)
+# Butterfly 2.0 - web terminal
 
-http://paradoxxxzero.github.io/assets/butterfly_2.0_1.gif
+![](http://paradoxxxzero.github.io/assets/butterfly_2.0_1.gif)
+
+
+## Description
+
+Butterfly is a xterm compatible terminal that runs in your browser.
+
+
+## Features
+
+* xterm compatible (support a lot of unused features!)
+* Native browser scroll and search
+* Theming in css / sass [(18 preset themes)](https://github.com/paradoxxxzero/butterfly-themes) endless possibilities!
+* HTML in your terminal! cat images and use &lt;table&gt;
+* Multiple sessions support (à la screen -x) to simultaneously access a terminal from several places on the planet!
+* Secure authentication with X509 certificates!
+* 16,777,216 colors support!
+* Keyboard text selection!
+* Desktop notifications on terminal output!
+* Geolocation from browser!
+* May work on firefox too!
+
+## Try it
+docker run \
+        --env PASSWORD=password \
+        -p 2233:2233 \
+        -d georgeyord/butterfly-web-terminal
+
+All [Kudos](https://en.wikipedia.org/wiki/Kudos) go to [garland/butterfly](https://hub.docker.com/r/garland/butterfly/)
+The main addition is that ssh client is installed to ssh to different machines from the web terminal.
+
