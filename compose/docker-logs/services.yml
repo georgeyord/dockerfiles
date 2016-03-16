@@ -1,0 +1,7 @@
+version: '2'
+services:
+  log_observer:
+    image: gerchardon/docker-logio
+    command: -h logio -n docker
+  logio:
+    image: temal/logio-server

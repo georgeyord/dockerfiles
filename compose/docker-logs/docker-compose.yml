@@ -1,0 +1,18 @@
+version: '2'
+services:
+  log_observer:
+    extends:
+      file: ./services.yml
+      service: log_observer
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  logio:
+    extends:
+      file: ./services.yml
+      service: logio
+    depends_on:
+      - log_observer
+    # ports:
+    #   - 28777:28777
+    #   - 28778:28778
