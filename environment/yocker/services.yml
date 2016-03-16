@@ -1,0 +1,8 @@
+version: "2"
+services:
+  proxy:
+    image: georgeyord/reverse-nginx
+    volumes:
+      - ./data/ssl:/etc/nginx/ssl
+      - ./data/conf.d:/etc/nginx/conf.d/
+      - ./data/default.conf.tpl:/templates/default.conf.tpl
