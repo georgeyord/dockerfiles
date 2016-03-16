@@ -1,4 +1,4 @@
-FROM python:3
+FROM debian:latest
 
 RUN apt-get update --quiet > /dev/null && \
   apt-get install --assume-yes --force-yes -qq \
