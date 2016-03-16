@@ -1,5 +1,10 @@
 version: "2"
 services:
+  cadvisor_proxy:
+    image: georgeyord/reverse-nginx
+    volumes:
+     - ./data/ssl:/etc/nginx/ssl
+     - ./data/conf.d:/etc/nginx/conf.d/
   cadvisor:
     image: "google/cadvisor:latest"
     volumes:

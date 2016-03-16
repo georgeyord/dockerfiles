@@ -28,6 +28,8 @@ services:
     extends:
       file: ./services.yml
       service: butterfly
+    depends_on:
+     - butterfly_proxy
     # ports:
     #   - 2233:2233
     volumes:
