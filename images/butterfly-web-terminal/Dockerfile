@@ -3,7 +3,7 @@ FROM debian:latest
 RUN apt-get update --quiet > /dev/null && \
   apt-get install --assume-yes --force-yes -qq \
   python-setuptools python-dev build-essential \
-  libffi-dev libssl-dev ssh-client && \
+  python-pip libffi-dev libssl-dev ssh-client && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
