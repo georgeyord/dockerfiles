@@ -24,8 +24,6 @@ etcdbrowser:
   image: johnmccabe/etcd-browser
   environment:
    - ETCD_HOST=etcd_host
-   - SERVICE_FRONTEND_PORT=80
-   - SERVICE_NAME=etcd.mydocker.co
   links:
    - etcd:etcd_host
 
@@ -51,22 +49,13 @@ whoami:
   image: jwilder/whoami
   ports:
    - :8000
-  environment:
-   - SERVICE_FRONTEND_PORT=80
-   - SERVICE_NAME=whoami.mydocker.co
 whoareyou:
   image: jwilder/whoami
   ports:
    - :8000
   environment:
    - SERVICE_DISABLED=1
-   - SERVICE_FRONTEND_PORT=80
-   - SERVICE_NAME=whoami.mydocker.co
 whoarethey:
   image: jwilder/whoami
   ports:
    - :8000
-  environment:
-   - SERVICE_FRONTEND_PORT=80
-   - SERVICE_NAME=whoami.mydocker.co
-# docker run -it --rm -p :8000 -e SERVICE_NAME=web1 --name whoami2 jwilder/whoami

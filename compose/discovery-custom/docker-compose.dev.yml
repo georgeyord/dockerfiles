@@ -34,22 +34,11 @@ services:
     image: jwilder/whoami
     ports:
      - 8001:8000
-    environment:
-     - SERVICE_FRONTEND_PORT=80
-     - SERVICE_NAME=whoami.mydocker.co
   whoareyou:
     image: jwilder/whoami
     ports:
      - 8002:8000
-    environment:
-    # - SERVICE_DISABLED=1
-     - SERVICE_FRONTEND_PORT=80
-     - SERVICE_NAME=whoami.mydocker.co
   whoarethey:
     image: jwilder/whoami
     ports:
      - 8003:8000
-    environment:
-     - SERVICE_FRONTEND_PORT=80
-     - SERVICE_NAME=whoami.mydocker.co
-  # docker run -it --rm -p :8000 -e SERVICE_NAME=web1 --name whoami2 jwilder/whoami

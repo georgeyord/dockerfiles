@@ -21,9 +21,6 @@ services:
       - HTPASSWD_PASSWORD=${BASIC_AUTH_PASSWORD}
       # Uncomment to change nginx's error level
       # - NGINX_ERROR_LEVEL=warn
-      # Used if you have serivice discovery service
-      - SERVICE_80_FRONTEND_PORT=80
-      - SERVICE_NAME=whoami.mydocker.co
     volumes:
       - ./data/default.conf.tpl:/templates/default.conf.tpl
   example_host:

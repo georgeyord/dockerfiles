@@ -17,12 +17,6 @@ server:
   environment:
    - ES_HEAP_SIZE=200m
    - NODE_NAME=efk1
-   # Used in service discovery
-   - SERVICE_NAME=kibana.mydocker.co
-   - SERVICE_80_FRONTEND_PORT=80
-   - SERVICE_9880_FRONTEND_PORT=9880
-   - SERVICE_24220_FRONTEND_PORT=24220
-   - SERVICE_24224_FRONTEND_PORT=24224
   volumes:
    - bin/td-agent/td-agent.conf:/etc/td-agent/td-agent.conf:ro
    - bin/kibana/config.js:/usr/local/kibana/config.js:ro

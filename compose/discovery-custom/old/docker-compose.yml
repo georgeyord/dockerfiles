@@ -33,9 +33,6 @@ proxy:
     # Uncomment to activate baic auth
     - HTPASSWD_USER=${BASIC_AUTH_USER}
     - HTPASSWD_PASSWORD=${BASIC_AUTH_PASSWORD}
-    # Used if you have serivice discovery service
-    - SERVICE_80_FRONTEND_PORT=80
-    - SERVICE_NAME=etcd.mydocker.co
   links:
    - etcdbrowser:etcd_ui
 etcdbrowser:
