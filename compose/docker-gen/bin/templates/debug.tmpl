@@ -1,0 +1,8 @@
+{
+  "References": ["https://github.com/jwilder/docker-gen#emit-structure"],
+  "Docker": {{ json .Docker }},
+  "Env": {{ json .Env }},
+  "Containers": {{ json . }},
+  {{ $containersGrouped := groupBy . "Env.SERVICE_NAME" }}
+  "ContainersGrouped": {{ json $containersGrouped }}
+}

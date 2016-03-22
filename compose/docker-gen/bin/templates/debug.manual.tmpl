@@ -1,0 +1,57 @@
+# GLOBAL ENVIRONMENT
+# FQDN_BASE {{ .Env.FQDN_BASE }}
+# Docker Version {{ .Docker.Version }}
+
+{
+{{range $container_index, $container := .}}
+  {{ if $container_index }},{{end}}
+  "{{ $container_index }}": {
+    "ID": "{{ $container.ID }}",
+    "Name": "{{ $container.Name }}",
+    "Hostname": "{{ $container.Hostname }}",
+    "Gateway": "{{ $container.Gateway }}",
+    "IP": "{{ $container.IP }}",
+    "IP6LinkLocal": "{{ $container.IP6LinkLocal }}",
+    "IP6Global": "{{ $container.IP6Global }}",
+    "Images": [],
+    "Volumes": [],
+    "Labels": [],
+    "Mounts": [],
+    "Addresses": {
+    {{range $addr_index, $address := $container.Addresses}}
+      {{ if $addr_index }},{{end}}"{{ $addr_index }}": {
+      "IP": "{{ $address.IP }}",
+      "IP6LinkLocal": "{{ $address.IP6LinkLocal }}",
+      "IP6Global": "{{ $address.IP6Global }}",
+      "Port": "{{ $address.Port }}",
+      "HostPort": "{{ $address.HostPort }}",
+      "Proto": "{{ $address.Proto }}",
+      "HostIP": "{{ $address.HostIP }}"
+      }
+    {{end}}
+    },
+    "Networks": {
+    {{range $net_index, $network := $container.Networks}}
+      {{ if $net_index }},{{end}}"{{ $net_index }}": {
+      "IP": "{{ $network.IP }}",
+      "Name": "{{ $network.Name }}",
+      "Gateway": "{{ $network.Gateway }}",
+      "EndpointID": "{{ $network.EndpointID }}",
+      "IPv6Gateway": "{{ $network.IPv6Gateway }}",
+      "GlobalIPv6Address": "{{ $network.GlobalIPv6Address }}",
+      "MacAddress": "{{ $network.MacAddress }}"
+      }
+    {{end}}
+    },
+    "Env": {
+    {{range $env_label, $env_value := $container.Env}}
+      "{{ $env_label }}": "{{ $env_value }}",
+    {{end}}
+      "foo": "bar"
+    },
+    "State": {
+      "Running": "{{ $container.State.Running }}",
+    }
+  }
+{{end}}
+}

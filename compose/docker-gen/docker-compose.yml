@@ -1,0 +1,13 @@
+version: "2"
+services:
+  docker_gen:
+    extends:
+      file: ./services.yml
+      service: docker_gen
+    command: -config /docker-gen/config/discovery.conf
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./bin/config:/docker-gen/config
+      - ./bin/templates:/docker-gen/templates
+      - ./data/dest:/docker-gen/dest
+
