@@ -1,0 +1,33 @@
+==============================
+Docker.Name {{ .Docker.Name }}
+Docker.Version {{ .Docker.Version }}
+
+{{range $container_index, $container := .}}
+------------------------------
+{{ $container_index }}:
+  Name: {{ $container.Name }}
+  Running: {{ $container.State.Running }}
+  Hostname: {{ $container.Hostname }}
+  ID: {{ $container.ID }}
+  Addresses:
+    {{range $addr_index, $address := $container.Addresses}}
+    IP: {{ $address.IP }}
+    HostPort: {{ $address.HostPort }}
+    Port: {{ $address.Port }}
+    Proto: {{ $address.Proto }}
+  {{end}}
+  Networks: {{range $net_index, $network := $container.Networks}}
+    Name: {{ $network.Name }}
+    IP: {{ $network.IP }}
+  {{end}}
+  Service: {{range $env_label, $env_value := $container.Env}}
+    {{ if (eq $env_label "SERVICE_NAME") }}Name: {{ $env_value }}{{end}}
+    {{ if (eq $env_label "SERVICE_PORT_MAPPING") }}PortMapping: {{ $env_value }}{{end}}
+  {{end}}
+  Compose: {{range $label_key, $label_value := $container.Labels}}
+    {{ if (eq $label_key "com.docker.compose.project") }}Project: {{ $label_value }}{{end}}
+    {{ if (eq $label_key "com.docker.compose.service") }}Service: {{ $label_value }}{{end}}
+    {{ if (eq $label_key "com.docker.compose.container-number") }}Instance: {{ $label_value }}{{end}}
+  {{end}}
+  JSON: {{ json $container }}
+{{end}}

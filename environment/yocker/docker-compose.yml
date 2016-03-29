@@ -10,19 +10,26 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./data/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./bin/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./bin/nginx/conf:/etc/nginx/base:ro
+      - ./data/nginx/conf:/etc/nginx/conf.d:ro
       - ./data/nginx/ssl:/etc/nginx/ssl:ro
-  docker_gen:
+      # Static sites
+      - ./bin/nginx/html/status:/var/www/status
+  gen:
     extends:
       file: ../../compose/docker-gen/services.yml
       service: docker_gen
-    command: -config /docker-gen/config/discovery.conf
+    command: -config /docker-gen/config/proxy.conf
     depends_on:
       - proxy
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./data/docker-gen:/docker-gen
-      - ./data/nginx/conf.d:/etc/nginx/conf.d
+      - ./bin/docker-gen:/docker-gen
+      # Output for proxy
+      - ./data/nginx/conf:/proxy/conf
+      # Output for status static site (containers.json)
+      - ./bin/nginx/html/status:/status/html
     volumes_from:
       - proxy
   ## CADVISOR ##
@@ -32,7 +39,7 @@ services:
       service: cadvisor
     environment:
       # Used in service discovery
-      - SERVICE_NAMES=cadvisor.mydocker.co
+      - SERVICE_NAME=cadvisor.mydocker.co
       - SERVICE_PORT_MAPPING=443/ssl:8080
   ## IDE ##
   ide:
@@ -48,26 +55,18 @@ services:
       - SERVICE_PORT_MAPPING=443/ssl:8181
     volumes:
       - /root/codebase:/workspace
-  ## STATIC SITE ##
-  static_mydocker:
-    extends:
-      file: ../../compose/nginx/services.yml
-      service: nginx
-    environment:
-      # Used in service discovery
-      - SERVICE_DEFAULT=true
-      - SERVICE_NAME=www.mydocker.co
-      - SERVICE_PORT_MAPPING=443/ssl:80
-  ## BUTTERFLY ##
-  butterfly:
+  ## TERMINAL ##
+  terminal:
     extends:
       file: ../../compose/web-terminal/services.yml
       service: butterfly
     volumes:
       - ~/.ssh:/root/.ssh:ro
+    #ports:
+    #  - 2233:2233
     environment:
-      # Used if you have service discovery service
-      - PASSWORD=${BASIC_AUTH_PASSWORD}
+      # Terminal password
+      - PASSWORD=${SECURE_PASSWORD}
       # Used in service discovery
       - SERVICE_NAME=terminal.mydocker.co
       - SERVICE_PORT_MAPPING=443/ssl:2233
@@ -87,8 +86,8 @@ services:
       - log_observer
     environment:
       # Used if you have service discovery service
-      - PASSWORD=${BASIC_AUTH_PASSWORD}
-      #
+      - PASSWORD=${SECURE_PASSWORD}
+      # Used in service discovery
       - SERVICE_NAME=logs.mydocker.co
       - SERVICE_PORT_MAPPING=443/ssl:28778
     ## REGISTRY ##
@@ -102,7 +101,7 @@ services:
   #     # To enable SSL encryption
   #     - 443:443
   #   # environment:
-  #      #
+  #      # Used in service discovery
   #      - SERVICE_NAME=registryui.local.mydocker.co
   #      - SERVICE_PORT_MAPPING=443/ssl:8080
   # registry:

@@ -16,6 +16,10 @@ services:
     image: georgeyord/heartbeat
     build:
       context: ./heartbeat
+  nginx-proxy:
+    image: georgeyord/nginx-proxy
+    build:
+      context: ./nginx-proxy
   raml-abao:
     image: georgeyord/raml-abao-automated-testing
     build:
@@ -36,6 +40,10 @@ services:
     image: georgeyord/skype-bot
     build:
       context: ./skype-bot
+  smokeping:
+    image: georgeyord/smokeping
+    build:
+      context: ./smokeping
   sshfs:
     image: georgeyord/sshfs
     build:
