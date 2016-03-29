@@ -4,7 +4,7 @@ TARGET_PATH='/root/codebase/georgeyord/dockerfiles/environment/yocker/bin/nginx/
 
 while true; do
   clear
-  docker ps -a > $TARGET_PATH
+  docker ps -as > $TARGET_PATH
   cat $TARGET_PATH
   sleep 10;
 done

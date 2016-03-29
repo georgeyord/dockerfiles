@@ -47,8 +47,8 @@ services:
       file: ../../compose/ide/services.yml
       service: ide
     command: --auth ${BASIC_AUTH_USER}:${BASIC_AUTH_PASSWORD}
-    ports:
-      - 8181:8181
+    # ports:
+    #   - 8181:8181
     environment:
       # Used in service discovery
       - SERVICE_NAME=ide.mydocker.co
