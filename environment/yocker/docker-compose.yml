@@ -15,23 +15,19 @@ services:
       - ./data/nginx/conf:/etc/nginx/conf.d:ro
       - ./data/nginx/ssl:/etc/nginx/ssl:ro
       # Static sites
-      - ./bin/nginx/html/status:/var/www/status
+      - ./bin/nginx/www:/var/www
   gen:
     extends:
       file: ../../compose/docker-gen/services.yml
       service: docker_gen
     command: -config /docker-gen/config/proxy.conf
-    depends_on:
-      - proxy
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./bin/docker-gen:/docker-gen
       # Output for proxy
-      - ./data/nginx/conf:/proxy/conf
+      - ./data/nginx/conf:/output/proxy
       # Output for status static site (containers.json)
-      - ./bin/nginx/html/status:/status/html
-    volumes_from:
-      - proxy
+      - ./bin/nginx/www/status:/output/status
   ## CADVISOR ##
   cadvisor:
     extends:

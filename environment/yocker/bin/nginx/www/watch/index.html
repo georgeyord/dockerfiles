@@ -1,0 +1,57 @@
+<html>
+<head>
+    <title>monitor</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <style>
+        iframe {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Docker monitor</h1>
+
+<!-- Nav tabs -->
+<ul id="menu" class="nav nav-tabs" role="tablist">
+    <li role="presentation">
+        <a href="#status" data-url="https://status.mydocker.co/" role="tab" data-toggle="tab" class="bind-select-tab">Status</a>
+    </li>
+    <li role="presentation">
+        <a href="#ps" data-url="https://status.mydocker.co/ps.txt" role="tab" data-toggle="tab" class="bind-select-tab">List containers</a>
+    </li>
+    <li role="presentation">
+        <a href="#logs" data-url="https://logs.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab">Logio</a>
+    </li>
+    <li role="presentation">
+        <a href="#cadvisor" data-url="https://cadvisor.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab">cAdvisor</a>
+    </li>
+    <li role="presentation">
+        <a href="#uptime" data-url="https://uptimerobot.com/dashboard" role="tab" data-toggle="tab" class="bind-select-tab">Uptime</a>
+    </li>
+    <li role="presentation">
+        <a href="#" role="tab" data-toggle="tab" class="bind-reload">Reload <i class="fa fa-refresh"></i></a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content" style="margin-top: 20px;">
+    <div role="tabpanel" class="tab-pane" id="status"></div>
+    <div role="tabpanel" class="tab-pane" id="ps"></div>
+    <div role="tabpanel" class="tab-pane" id="logs"></div>
+    <div role="tabpanel" class="tab-pane" id="cadvisor"></div>
+    <div role="tabpanel" class="tab-pane" id="uptime"></div>
+</div>
+</body>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/index.js"></script>
+</html>

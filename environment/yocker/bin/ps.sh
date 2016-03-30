@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TARGET_PATH='/root/codebase/georgeyord/dockerfiles/environment/yocker/bin/nginx/html/status/ps.txt'
+TARGET_PATH='/root/codebase/georgeyord/dockerfiles/environment/yocker/bin/nginx/www/status/ps.txt'
 
 while true; do
   clear

@@ -1,76 +1,3 @@
-<html>
-<head>
-    <title>docker--gen-dynatable by georgeyord</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="googlebot" content="noindex, nofollow">
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-</head>
-
-<body>
-<h1>Docker status</h1>
-
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active">
-        <a href="#status" role="tab" data-toggle="tab">Status</a>
-    </li>
-    <li role="presentation">
-        <a href="#ps" role="tab" data-toggle="tab">List containers</a>
-    </li>
-    <li role="presentation">
-        <a href="#logs" role="tab" data-toggle="tab">Logio</a>
-    </li>
-    <li role="presentation">
-        <a href="#cadvisor" role="tab" data-toggle="tab">cAdvisor</a>
-    </li>
-    <li role="presentation">
-        <a href="#" role="tab" data-toggle="tab"><i class="fa fa-refresh bind-reload"></i> reload</a>
-    </li>
-</ul>
-
-<!-- Tab panes -->
-<div class="tab-content" style="margin-top: 20px;">
-    <div role="tabpanel" class="tab-pane active" id="status">
-        <table class="table table-striped" id="status-table">
-            <thead>
-            <th>Name</th>
-            <th>Hostname</th>
-            <th>Status</th>
-            <th>Service</th>
-            <th>Compose</th>
-            <th>Addresses</th>
-            <th>Networks</th>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="ps">
-        <a class="btn btn-link btn-sm pull-right" href="/ps.txt" target="_blank">Open in new window <i class="fa fa-external-link"></i></a>
-        <iframe src="/ps.txt" width="100%" height="100%"></iframe>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="logs">
-        <a class="btn btn-link btn-sm pull-right" href="http://logs.mydocker.co" target="_blank">Open in new window <i class="fa fa-external-link"></i></a>
-        <iframe src="https://logs.mydocker.co/" width="100%" height="100%"></iframe>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="cadvisor">
-        <a class="btn btn-link btn-sm pull-right" href="http://cadvisor.mydocker.co" target="_blank">Open in new window <i class="fa fa-external-link"></i></a>
-        <iframe src="https://cadvisor.mydocker.co/" width="100%" height="100%"></iframe>
-    </div>
-</div>
-
-</body>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript">//<![CDATA[
 $(window).load(function () {
     /*global _ */
     $(document).ready(function () {
@@ -91,7 +18,6 @@ $(window).load(function () {
 
             render: function (containers) {
                 if (containers) {
-                    console.log(containers);
                     $('#status-table').dynatable({
                         dataset: {
                             records: containers
@@ -225,6 +151,4 @@ $(window).load(function () {
             statusTable.fetch();
         });
     });
-});//]]>
-</script>
-</html>
+});
