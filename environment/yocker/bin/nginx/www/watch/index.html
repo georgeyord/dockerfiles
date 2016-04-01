@@ -22,13 +22,34 @@
         <a href="#status" data-url="https://status.mydocker.co/" role="tab" data-toggle="tab" class="bind-select-tab">Status</a>
     </li>
     <li role="presentation">
-        <a href="#ps" data-url="https://status.mydocker.co/ps.txt" role="tab" data-toggle="tab" class="bind-select-tab">List containers</a>
+        <a href="#info" data-url="https://status.mydocker.co/api/info.json" role="tab" data-toggle="tab" class="bind-select-tab">Info</a>
     </li>
     <li role="presentation">
-        <a href="#logs" data-url="https://logs.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab">Logio</a>
+        <a href="#version" data-url="https://status.mydocker.co/api/version.json" role="tab" data-toggle="tab" class="bind-select-tab">Version</a>
+    </li>
+    <li role="presentation">
+        <a href="#containers" data-url="https://status.mydocker.co/api/containers.json" role="tab" data-toggle="tab" class="bind-select-tab">Containers</a>
+    </li>
+    <li role="presentation">
+        <a href="#images" data-url="https://status.mydocker.co/api/images.json" role="tab" data-toggle="tab" class="bind-select-tab">Images</a>
+    </li>
+    <li role="presentation">
+        <a href="#networks" data-url="https://status.mydocker.co/api/networks.json" role="tab" data-toggle="tab" class="bind-select-tab">Networks</a>
+    </li>
+    <li role="presentation">
+        <a href="#volumes" data-url="https://status.mydocker.co/api/volumes.json" role="tab" data-toggle="tab" class="bind-select-tab">Volumes</a>
+    </li>
+    <li role="presentation">
+        <a href="#ps" data-url="https://status.mydocker.co/api/docker_ps.txt" role="tab" data-toggle="tab" class="bind-select-tab">Docker ps</a>
+    </li>
+    <li role="presentation">
+        <a href="#memory" data-url="https://status.mydocker.co/api/memory.txt" role="tab" data-toggle="tab" class="bind-select-tab">Memory</a>
     </li>
     <li role="presentation">
         <a href="#cadvisor" data-url="https://cadvisor.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab">cAdvisor</a>
+    </li>
+    <li role="presentation">
+        <a href="#logs" data-url="https://logs.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab">Logio</a>
     </li>
     <li role="presentation">
         <a href="#uptime" data-url="https://uptimerobot.com/dashboard" role="tab" data-toggle="tab" class="bind-select-tab">Uptime</a>
@@ -41,7 +62,14 @@
 <!-- Tab panes -->
 <div class="tab-content" style="margin-top: 20px;">
     <div role="tabpanel" class="tab-pane" id="status"></div>
+    <div role="tabpanel" class="tab-pane" id="info"></div>
+    <div role="tabpanel" class="tab-pane" id="version"></div>
+    <div role="tabpanel" class="tab-pane" id="containers"></div>
+    <div role="tabpanel" class="tab-pane" id="images"></div>
+    <div role="tabpanel" class="tab-pane" id="networks"></div>
+    <div role="tabpanel" class="tab-pane" id="volumes"></div>
     <div role="tabpanel" class="tab-pane" id="ps"></div>
+    <div role="tabpanel" class="tab-pane" id="memory"></div>
     <div role="tabpanel" class="tab-pane" id="logs"></div>
     <div role="tabpanel" class="tab-pane" id="cadvisor"></div>
     <div role="tabpanel" class="tab-pane" id="uptime"></div>
