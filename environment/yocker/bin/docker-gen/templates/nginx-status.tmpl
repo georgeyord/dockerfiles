@@ -1,0 +1,20 @@
+[
+{{ $Containers := whereExist . "Env.SERVICE_NAME" }}
+{{range $container_index, $Container := whereExist $Containers "Env.SERVICE_PORT_MAPPING"}}
+  {{$ServiceName := $Container.Env.SERVICE_NAME}}
+  {{$Network := first $Container.Networks}}
+  {{$InternalIP := $Network.IP}}
+  {{range $PortMapping := split (print $Container.Env.SERVICE_PORT_MAPPING) ","}}
+    {{$PortDetails := split (print $PortMapping) ":"}}
+    {{$ExternalPortDetails := split (index $PortDetails 0) "/"}}
+    {{$ExternalPort := index $ExternalPortDetails 0}}
+    {{$InternalPort := index $PortDetails 1}}
+    {{$SslEnabled := when (eq $ExternalPort "443") true false}}
+    {{range $addr_index, $address := where $Container.Addresses ".Port" $InternalPort}}
+      {{with dict "Name" $Container.Name "ID" $Container.ID "ServiceName" $ServiceName "ExternalPort" $ExternalPort "InternalIP" $InternalIP "InternalPort" $InternalPort "SslEnabled" $SslEnabled}}
+      {{ if $container_index }},{{end}}{{json . }}
+      {{end}}
+    {{end}}
+  {{end}}
+{{end}}
+]
