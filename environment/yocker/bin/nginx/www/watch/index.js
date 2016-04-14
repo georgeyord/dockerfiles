@@ -16,9 +16,9 @@ $(window).load(function() {
       location.hash = target;
 
       if ($iframe.length === 0) {
-        var $reload = $('<a class="btn btn-link btn-sm pull-right" target="_blank"><i class="fa fa-external-link"></i> Open in new window</a>').attr('href', url),
-          $kill = $('<a class="btn btn-link btn-sm pull-right bind-iframe-kill" href="#"><i class="fa fa-hand-scissors-o"></i> Kill</a>'),
-          $refresh = $('<a class="btn btn-link btn-sm pull-right bind-iframe-reload" href="#"><i class="fa fa-refresh"></i> Reload</a>');
+        var $reload = $('<a class="btn btn-link btn-sm pull-right bind-toggable" target="_blank"><i class="fa fa-external-link"></i> Open in new window</a>').attr('href', url),
+          $kill = $('<a class="btn btn-link btn-sm pull-right bind-iframe-kill bind-toggable" href="#"><i class="fa fa-hand-scissors-o"></i> Kill</a>'),
+          $refresh = $('<a class="btn btn-link btn-sm pull-right bind-iframe-reload bind-toggable" href="#"><i class="fa fa-refresh"></i> Reload</a>');
         $iframe = $('<iframe>').attr('width', "100%").attr('height', "100%");
         $target
             .append($reload)
@@ -55,6 +55,18 @@ $(window).load(function() {
     $('body').on('click', '.bind-iframe-kill', function(e) {
       e.preventDefault();
       $(this).parent().children().remove();
+    });
+    $('body').on('click', '.bind-minimize', function(e) {
+      e.preventDefault();
+      var $this = $(this),
+          $icon = $this.children('i');
+
+      $this
+        .toggleClass('minimize');
+      $icon
+        .toggleClass('fa-caret-up')
+        .toggleClass('fa-caret-down');
+      $('.bind-toggable').toggle();
     });
 
     if (location.hash === "" || location.hash === "#") {
