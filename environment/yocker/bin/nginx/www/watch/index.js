@@ -1,6 +1,120 @@
 $(window).load(function() {
   /*global _ */
   $(document).ready(function() {
+    function initMenu(){
+      var hostname = location.hostname.split('.'),
+          subdomain = hostname.shift(),
+          domain = hostname.join('.'),
+          $menu = $('#menu'),
+          $contentContainer = $menu.next('.tab-content'),
+          prepareUrl = function(url) {
+            return url.replace('{DOMAIN}', domain);
+          }
+          items = {
+            index: {
+              url: prepareUrl("https://status.{DOMAIN}#nginx"),
+              icon: 'fa-map-o',
+              label: 'Index'
+            },
+            containers: {
+              url: prepareUrl("https://status.{DOMAIN}#containers"),
+              icon: 'fa-play',
+              label: 'Containers'
+            },
+            images: {
+              url: prepareUrl("https://status.{DOMAIN}#images"),
+              icon: 'fa-cubes',
+              label: 'Images'
+            },
+            info: {
+              url: prepareUrl("https://status.{DOMAIN}#info"),
+              icon: 'fa-server',
+              label: 'Info'
+            },
+            version: {
+              url: prepareUrl("https://status.{DOMAIN}#version"),
+              icon: 'fa-arrow-circle-o-up',
+              label: 'Version'
+            },
+            memory: {
+              url: prepareUrl("https://status.{DOMAIN}/api/memory.txt"),
+              icon: 'fa-signal',
+              label: 'Memory'
+            },
+            cadvisor: {
+              url: prepareUrl("https://cadvisor.{DOMAIN}"),
+              icon: 'fa-tachometer',
+              label: 'cAdvisor'
+            },
+            ide: {
+              url: prepareUrl("https://ide.{DOMAIN}"),
+              icon: 'fa-pencil-square-o',
+              label: 'ide'
+            },
+            terminal: {
+              url: prepareUrl("https://terminal.{DOMAIN}"),
+              icon: 'fa-terminal',
+              label: 'Terminal'
+            },
+            logs: {
+              url: prepareUrl("https://logs.{DOMAIN}"),
+              icon: 'fa-newspaper-o',
+              label: 'Logs'
+            },
+            nginx: {
+              url: prepareUrl("https://nginx.{DOMAIN}"),
+              icon: 'fa-globe',
+              label: 'Nginx'
+            },
+            uptime: {
+              url: prepareUrl("https://uptimerobot.com/dashboard"),
+              icon: 'fa-bell',
+              label: 'Uptime'
+            },
+            reload: {
+              myclass: "bind-reload",
+              icon: 'fa-refresh',
+              label: 'Reload'
+            }
+          };
+
+      if($contentContainer.length === 0) {
+        $contentContainer = $('<div>').addClass('tab-content');
+        $menu.after($contentContainer);
+      }
+      $menu.html('').addClass("nav nav-tabs bind-toggable").attr("role","tablist");
+      $contentContainer.html('');
+      $('#domain').html('@'+domain);
+      $('title').html('monitor@'+domain);
+
+      _.each(items, function(item, key) {
+        var $li = $('<li role="presentation">'),
+            $a= $('<a role="tab" data-toggle="tab">')
+                .addClass('bind-select-tab')
+                .attr('href','#'+key),
+            $i = $('<i class="fa">'),
+            $content = $('<div role="tabpanel" class="tab-pane">');
+
+            if(item.url) {
+              $a.attr('data-url',item.url)
+            }
+            if(item.myclass) {
+              $a.addClass(item.myclass);
+            }
+            if(item.icon) {
+              $a.append($i.addClass(item.icon));
+            }
+            if(item.label) {
+              $a.append(' '+item.label);
+            }
+            $li.append($a);
+            $menu.append($li);
+            $contentContainer.append($content.attr('id',key));
+      });
+    }
+    initMenu();
+
+
     // Activate reloading buttons
     $('.bind-reload').on('click', function(e) {
       e.preventDefault();

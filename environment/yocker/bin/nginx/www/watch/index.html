@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>monitor</title>
+    <title>Docker monitor</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
@@ -26,70 +26,9 @@
 <body>
 <button id="minimize" class="btn btn-info btn-xs bind-minimize"><i class="fa fa-caret-up"></i></button>
 
-<h1 class="bind-toggable">Docker monitor</h1>
+<h1 class="bind-toggable">Docker monitor <span id='domain'></span></span></h1>
+<ul id="menu"></ul>
 
-<!-- Nav tabs -->
-<ul id="menu" class="nav nav-tabs bind-toggable" role="tablist">
-    <li role="presentation">
-        <a href="#index" data-url="https://status.mydocker.co#nginx" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-map-o"></i> Index</a>
-    </li>
-    <li role="presentation">
-        <a href="#containers" data-url="https://status.mydocker.co#containers" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-play"></i> Containers</a>
-    </li>
-    <li role="presentation">
-        <a href="#images" data-url="https://status.mydocker.co#images" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-cubes"></i> Images</a>
-    </li>
-    <li role="presentation">
-        <a href="#info" data-url="https://status.mydocker.co#info" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-server"></i> Info</a>
-    </li>
-    <li role="presentation">
-        <a href="#version" data-url="https://status.mydocker.co#version" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-arrow-circle-o-up"></i> Version</a>
-    </li>
-    <!--<li role="presentation">-->
-    <!--    <a href="#networks" data-url="https://status.mydocker.co#networks" role="tab" data-toggle="tab" class="bind-select-tab">Networks</a>-->
-    <!--</li>-->
-    <!--<li role="presentation">-->
-    <!--    <a href="#ps" data-url="https://status.mydocker.co/api/docker_ps.txt" role="tab" data-toggle="tab" class="bind-select-tab">Docker ps</a>-->
-    <!--</li>-->
-    <li role="presentation">
-        <a href="#memory" data-url="https://status.mydocker.co/api/memory.txt" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-signal"></i> Memory</a>
-    </li>
-    <li role="presentation">
-        <a href="#cadvisor" data-url="https://cadvisor.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-tachometer"></i> cAdvisor</a>
-    </li>
-    <li role="presentation">
-        <a href="#ide" data-url="https://ide.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-pencil-square-o"></i> ide</a>
-    </li>
-    <li role="presentation">
-        <a href="#terminal" data-url="https://terminal.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-terminal"></i> Terminal</a>
-    </li>
-    <li role="presentation">
-        <a href="#logs" data-url="https://logs.mydocker.co" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-newspaper-o"></i> Logio</a>
-    </li>
-    <li role="presentation">
-        <a href="#uptime" data-url="https://uptimerobot.com/dashboard" role="tab" data-toggle="tab" class="bind-select-tab"><i class="fa fa-bell"></i> Uptime</a>
-    </li>
-    <li role="presentation">
-        <a href="#" role="tab" data-toggle="tab" class="bind-reload"><i class="fa fa-refresh"></i> Reload</a>
-    </li>
-</ul>
-
-<!-- Tab panes -->
-<div class="tab-content">
-    <div role="tabpanel" class="tab-pane" id="index"></div>
-    <div role="tabpanel" class="tab-pane" id="containers"></div>
-    <div role="tabpanel" class="tab-pane" id="images"></div>
-    <div role="tabpanel" class="tab-pane" id="info"></div>
-    <div role="tabpanel" class="tab-pane" id="version"></div>
-    <div role="tabpanel" class="tab-pane" id="networks"></div>
-    <div role="tabpanel" class="tab-pane" id="ps"></div>
-    <div role="tabpanel" class="tab-pane" id="memory"></div>
-    <div role="tabpanel" class="tab-pane" id="logs"></div>
-    <div role="tabpanel" class="tab-pane" id="cadvisor"></div>
-    <div role="tabpanel" class="tab-pane" id="ide"></div>
-    <div role="tabpanel" class="tab-pane" id="terminal"></div>
-    <div role="tabpanel" class="tab-pane" id="uptime"></div>
-</div>
 </body>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
