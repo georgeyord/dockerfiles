@@ -14,6 +14,7 @@ services:
       - ./bin/nginx/conf:/etc/nginx/base:ro
       - ./data/nginx/conf:/etc/nginx/conf.d:ro
       - ./data/nginx/ssl:/etc/nginx/ssl:ro
+      - ./data/nginx/htpasswd:/etc/nginx/htpasswd:ro
       # Static sites
       - ./bin/nginx/www:/var/www
   gen:
