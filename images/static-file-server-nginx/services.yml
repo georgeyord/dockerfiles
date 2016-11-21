@@ -1,0 +1,14 @@
+version: "2"
+services:
+  proxy:
+    image: georgeyord/static-file-server-nginx
+    # environment:
+    #   HTPASSWD_USER: user
+    #   HTPASSWD_PASSWORD: pass
+    #   SSL_ACTIVE: 1
+    #   PUBLIC_PORT: 8088
+    #   SERVED_PATH: /www
+    # volumes:
+    #  - ./data/ssl:/etc/nginx/ssl
+    #  - ./data/conf.d:/etc/nginx/conf.d/
+    #  - ./data/static:/static

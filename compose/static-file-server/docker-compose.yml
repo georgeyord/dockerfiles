@@ -4,6 +4,6 @@ services:
     extends:
       file: ./services.yml
       # You can use either of the 3 static servers: nodejs/python2/python3
-      service: nodejs
+      service: nginx
     # ports:
     #   - 80:80

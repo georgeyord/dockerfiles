@@ -1,18 +1,24 @@
 version: '2'
 services:
-  # You can use either of the 3 static servers
+  # You can use either of the static servers
+  nginx:
+    # Nginx static server
+    # docker run -it --rm --volume=`PWD`:/static -p=8088:80 georgeyord/static-file-server-nginx
+    image: georgeyord/static-file-server-nginx
+    volumes:
+     - ./data:/static:ro
   nodejs:
     # Node static server runs `npm install` and `bower install` before serving
     image: georgeyord/static-file-server-nodejs
     volumes:
-     - data:/static:ro
+     - ./data:/static:ro
   python2:
     # Python static server runs `pip install` before serving
     image: georgeyord/static-file-server-python:2
     volumes:
-     - data:/static:ro
+     - ./data:/static:ro
   python3:
     # Python static server runs `pip install` before serving
     image: georgeyord/static-file-server-python:3
     volumes:
-     - data:/static:ro
+     - ./data:/static:ro
