@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  terminal:
+    image: georgeyord/terminal:latest
+    container_name: terminal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./home:/myhome
+    environment:
+      # Custom UID/GID
+      # UID:
+      # GID:
+      # Taken by running: `perl -e 'print crypt($ARGV[0], "password")' 'YOUR_PASSWORD'`
+      USER_PASSWORD: pa3SV5vOi4s9A%
+      # DEBUG_FLAG: "true"
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
