@@ -1,0 +1,28 @@
+// Listen at port 8080 by default
+port = "8080"
+
+// Enable TSL/SSL by default
+// enable_tls = true
+
+// Title format of browser window
+title-format = "{{ .command }}@{{ .hostname }}"
+
+// Enable basic Authentication
+// enable_basic_auth = true
+// credential = "admin:AdminPassword"
+
+// Permit Write - Enable only with Strong Authentication
+permit_write = true
+
+// Enable Random URL
+// random-url = true
+
+// Enable reconnect
+reconnect = true
+
+// hterm preferences
+// Smaller font and a little bit bluer background color
+preferences {
+    font_size = 15
+    background_color = "rgb(16, 16, 32)"
+}
