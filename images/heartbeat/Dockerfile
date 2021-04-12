@@ -1,6 +1,4 @@
-FROM debian
-
-MAINTAINER Giorgos Papaefthymiou <george.yord@gmail.com>
+FROM debian:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
