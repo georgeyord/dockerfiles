@@ -2,19 +2,28 @@ version: '3'
 
 services:
   terminal:
+    # build: .
     image: georgeyord/terminal:latest
     container_name: terminal
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./home:/myhome
-    environment:
-      # Custom UID/GID
-      # UID:
-      # GID:
-      # Taken by running: `perl -e 'print crypt($ARGV[0], "password")' 'YOUR_PASSWORD'`
-      USER_PASSWORD: pa3SV5vOi4s9A%
-      # DEBUG_FLAG: "true"
+      # - ./data/myhome:/myhome
     ports:
       - "8080:8080"
-    expose:
-      - "8080"
+    # Override `command` to run the terminal without `byobu` ()enabled by default
+    command:
+      - /bin/zsh
+    # environment:
+      # Setup a custom user
+      # Use `id` in host machine to find the UID/GID you use in host machine
+      # USER_ID: 9999 # Required to use a custom user
+      # GROUP_ID: 9999 # Optional, set user group id
+      # USER_NAME: myuser # Optional, set desired name
+      # USER_HOME: /custom_home # Optional, set a custom home path
+
+      # Set preferred Gotty options: https://github.com/yudai/gotty#options
+      # GOTTY_OPTIONS:
+      # Set a custom timezone
+      # TZ: "Europe/Berlin"
+      # Enable script verbose logs
+      # DEBUG_FLAG: "true"

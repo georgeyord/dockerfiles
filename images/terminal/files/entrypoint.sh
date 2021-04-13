@@ -7,39 +7,46 @@ if [[ "${DEBUG_FLAG:-}" == "true" ]]; then
   set -o xtrace
 fi
 
-if [ "$1" = 'bash' ]; then
+if [ "${1:-}" = 'bash' ]; then
     exec bash "$@"
 fi
 
-if [[ "${UID:-}" != "" ]]; then
-  if [[ "${GID:-}" == "" ]]; then
-    GID="${UID}"
+if [[ "${USER_ID:-}" != "" ]]; then
+  if [[ "${USER_NAME:-}" == "" ]]; then
+    USER_NAME="myuser"
   fi
-  if [[ "${USERNAME:-}" == "" ]]; then
-    USERNAME="myuser"
+  if [[ "${GROUP_ID:-}" == "" ]]; then
+    GROUP_ID="${USER_ID}"
   fi
   set +o errexit
-  getent passwd "${USERNAME}"
+  getent passwd "${USER_NAME}"
   USER_EXISTS="$?"
   set -o errexit
   if [ "${USER_EXISTS}" == "0" ]; then
-    echo "User ${USERNAME} (${UID}/${GID}) already exists, bypassing configuration..."
+    echo "User ${USER_NAME} (${USER_ID}/${GROUP_ID}) already exists, bypassing setup..."
   else
-    echo "Prepare user namespace for user ${UID}/${GID}"
-    groupadd -g "${GID}" "${USERNAME}"
+    if [[ "${USER_HOME:-}" == "" ]]; then
+      USER_HOME="/myhome"
+    fi
+    mkdir -p "${USER_HOME}"
+
+    echo "Prepare user namespace for user '${USER_NAME}' (${USER_ID}/${GROUP_ID})"
+    groupadd -g "${GROUP_ID}" "${USER_NAME}" || true
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
     useradd --system \
             --create-home \
-            --home-dir /myhome \
-            --uid "${UID}" \
-            --gid "${GID}" \
-            --password "${USER_PASSWORD}" \
-            --groups "sudo,docker" \
-            "${USERNAME}"
-    id "${USERNAME}" -nG
+            --home-dir "${USER_HOME}" \
+            --uid "${USER_ID}" \
+            --gid "${GROUP_ID}" \
+            --groups "sudo" \
+            --shell "${SHELL}" \
+            "${USER_NAME}"
+    id "${USER_NAME}" -nG
+    chown "${USER_ID}:${GROUP_ID}" "${USER_HOME}"
+    cd "${USER_HOME}"
   fi
 else
-  USERNAME="$(whoami)"
+  USER_NAME="$(whoami)"
 fi
 
 if [ -f /prepare.sh ]; then
@@ -51,7 +58,7 @@ echo "Start GoTTY..."
 args=("$@")
 
 exec /usr/sbin/gosu \
-  "${USERNAME}:${USERNAME}" \
+  "${USER_NAME}" \
   /usr/local/bin/gotty \
     --config /.gotty \
     ${GOTTY_OPTIONS:-} \

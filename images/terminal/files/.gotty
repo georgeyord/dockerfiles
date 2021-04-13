@@ -5,7 +5,7 @@ port = "8080"
 // enable_tls = true
 
 // Title format of browser window
-title-format = "{{ .command }}@{{ .hostname }}"
+// title-format = "{{ .command }}@{{ .hostname }}"
 
 // Enable basic Authentication
 // enable_basic_auth = true
@@ -22,7 +22,7 @@ reconnect = true
 
 // hterm preferences
 // Smaller font and a little bit bluer background color
-preferences {
-    font_size = 15
-    background_color = "rgb(16, 16, 32)"
-}
+// preferences {
+//     font_size = 15
+//     background_color = "rgb(16, 16, 32)"
+// }
