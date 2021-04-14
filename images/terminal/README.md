@@ -13,7 +13,8 @@ A terminal based on Debian OS that runs in your browser.
   * nc
   * curl
   * wget
-  * docker binary
+  * docker
+  * docker-compose
 * Optional access to host's docker service
 * Run be run as `root` (default scenario) or custom user
 * Custom user can have:
@@ -77,4 +78,6 @@ Byobu:
 
 Running with custom user:
 
-- The new user will not have `oh-my-zsh` setup yet, run `/setup-zsh.sh` to set it up`.
+- When you get the "This is the Z Shell configuration function for new users,
+zsh-newuser-install." screen, pick the Exit option (0). We will setup ZSH in the next step.
+- The new user will not have `oh-my-zsh` setup yet, run `/setup-zsh.sh` to set it up. Then just run `zsh` to get the new fully featured shell.

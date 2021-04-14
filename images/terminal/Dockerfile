@@ -4,6 +4,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV DOCKER_COMPOSE_VERSION="1.28.5"
 ENV GOTTY_VERSION="1.0.1"
 ENV GOTTY_OPTIONS=""
 RUN apt-get update --quiet > /dev/null \
@@ -13,6 +14,7 @@ RUN apt-get update --quiet > /dev/null \
       curl \
       byobu \
       curl \
+      fonts-firacode \
       git \
       gnupg \
       gosu \
@@ -34,6 +36,8 @@ RUN apt-get update --quiet > /dev/null \
     && apt-get install --assume-yes docker-ce \
     && curl -sLk https://github.com/yudai/gotty/releases/download/v${GOTTY_VERSION}/gotty_linux_amd64.tar.gz \
       | tar xzC /usr/local/bin \
+    && curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+    && chmod +x /usr/local/bin/docker-compose \
     && locale-gen en_US.UTF-8 \
     #
     # Clean up

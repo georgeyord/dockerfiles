@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 THEME=powerlevel10k/powerlevel10k
@@ -90,6 +90,57 @@ fi
 EOM
 }
 
+spaceship_config() {
+  # https://github.com/denysdovhan/spaceship-prompt/blob/master/docs/Options.md
+cat <<EOM
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  # hg            # Mercurial section (hg_branch  + hg_status)
+  # package       # Package version
+  # node          # Node.js section
+  # ruby          # Ruby section
+  # elixir        # Elixir section
+  # xcode         # Xcode section
+  # swift         # Swift section
+  golang        # Go section
+  # php           # PHP section
+  # rust          # Rust section
+  # haskell       # Haskell Stack section
+  # julia         # Julia section
+  docker        # Docker section
+  aws           # Amazon Web Services section
+  gcloud        # Google Cloud Platform section
+  # venv          # virtualenv section
+  # conda         # conda virtualenv section
+  # pyenv         # Pyenv section
+  # dotnet        # .NET section
+  # ember         # Ember.js section
+  kubectl       # Kubectl context section
+  terraform     # Terraform workspace section
+  exec_time     # Execution time
+  # line_sep      # Line break
+  # battery       # Battery level and status
+  # vi_mode       # Vi-mode indicator
+  # jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+SPACESHIP_PROMPT_ADD_NEWLINE="false"
+SPACESHIP_PROMPT_SEPARATE_LINE="false"
+
+# Change the prompt behaviour when recording with asciinema
+# To get a clean prompt manually run 'ASCIINEMA_REC=1 reload'
+if [[ -n \$ASCIINEMA_REC ]]; then
+  SPACESHIP_PROMPT_ORDER=(status)
+fi
+EOM
+}
+
 setup_dependencies
 
 cd /tmp
@@ -126,8 +177,10 @@ fi
 # Generate .zshrc
 zshrc_template "$HOME" "$THEME" "$plugin_list" > $HOME/.zshrc
 
-# Install powerlevel10k if no other theme was specified
-if [ "$THEME" = "powerlevel10k/powerlevel10k" ]; then
+if [[ "$THEME" =~ spaceship ]]; then
+    spaceship_config >> $HOME/.zshrc
+elif [ "$THEME" = "powerlevel10k/powerlevel10k" ]; then
+  # Install powerlevel10k if no other theme was specified
     git clone https://github.com/romkatv/powerlevel10k $HOME/.oh-my-zsh/custom/themes/powerlevel10k
     powerline10k_config >> $HOME/.zshrc
 fi
