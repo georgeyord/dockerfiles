@@ -13,7 +13,7 @@ remove_containers_even_if_running:
 	docker rm -f `docker ps -aq`
 
 # Remove any incomplete images
- :
+remove_dangling_images :
 	docker rmi -f `docker images -q --filter "dangling=true"`
 
 .PHONY: remove_containers_not_running remove_containers_even_if_running remove_images_incomplete
