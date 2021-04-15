@@ -9,6 +9,7 @@ ENV GOTTY_VERSION="1.0.1"
 ENV GOTTY_OPTIONS=""
 RUN apt-get update --quiet > /dev/null \
     && apt-get install --assume-yes -qq \
+      awscli \
       apt-transport-https \
       ca-certificates \
       curl \
@@ -28,6 +29,7 @@ RUN apt-get update --quiet > /dev/null \
       software-properties-common \
       sudo \
       wget \
+      vim \
       zsh \
     \
     && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
@@ -38,6 +40,7 @@ RUN apt-get update --quiet > /dev/null \
       | tar xzC /usr/local/bin \
     && curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
+    && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
     && locale-gen en_US.UTF-8 \
     #
     # Clean up
