@@ -2,14 +2,14 @@
 
 ## Description
 
-A terminal based on Debian OS that runs in your browser.
+A fully featured, Debian based terminal running in your browser.
 
 ## Features
 
 * Terminal (GoTTY with zsh and amenities)
 * ssh client
 * Multi-window (Byobu)
-* Net tools:
+* Tooling:
   * nc
   * curl
   * wget
@@ -31,6 +31,16 @@ A terminal based on Debian OS that runs in your browser.
 * [zsh](https://www.zsh.org/)
 * [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
 * [spaceship](https://github.com/denysdovhan/spaceship-prompt)
+
+## DevOps flavor
+
+To get additional tools used from DevOps use `devops` tag.
+
+Additional tooling:
+
+* aws cli
+* gcloud cli
+* terraform cli
 
 ## Try it
 
@@ -69,14 +79,18 @@ docker run -d \
 
 ## Additional tips
 
-Byobu:
+### Byobu
 
 - Since everything run in byobu you should get familiar with its capabilities.
 - You can disable byobu by overrding the `command` docker option.
 - If you get the "Configure Byobu's ctrl-a behavior..." screen, pick the second option (2).
 
-Running with custom user:
+### Running with custom user
 
 - When you get the "This is the Z Shell configuration function for new users,
 zsh-newuser-install." screen, pick the Exit option (0). We will setup ZSH in the next step.
 - The new user will not have `oh-my-zsh` setup yet, run `/setup-zsh.sh` to set it up. Then just run `zsh` to get the new fully featured shell.
+
+### Add a preparation script
+
+- If you mount a script in `/prepare.sh` this will run before starting the web terminal. This can be handy in case that you want always to install/setup your own tools.
