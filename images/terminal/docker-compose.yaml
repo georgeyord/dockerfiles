@@ -20,6 +20,7 @@ services:
       # GROUP_ID: 9999 # Optional, set user group id
       # USER_NAME: myuser # Optional, set desired name
       # USER_HOME: /custom_home # Optional, set a custom home path
+      # SUDO_WITHOUT_PASSWORD: "false" # Optional, toggle sudo access without password
 
       # Set preferred Gotty options: https://github.com/yudai/gotty#options
       # GOTTY_OPTIONS:

@@ -64,5 +64,7 @@ ADD ./files/.gotty /.gotty
 ADD ./files/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+ENV SUDO_WITHOUT_PASSWORD="true"
+
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD ["/usr/bin/byobu"]

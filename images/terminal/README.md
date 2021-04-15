@@ -6,7 +6,7 @@ A terminal based on Debian OS that runs in your browser.
 
 ## Features
 
-* Terminal (with zsh and amenities)
+* Terminal (GoTTY with zsh and amenities)
 * ssh client
 * Multi-window (Byobu)
 * Net tools:
@@ -16,12 +16,11 @@ A terminal based on Debian OS that runs in your browser.
   * docker
   * docker-compose
 * Optional access to host's docker service
-* Run be run as `root` (default scenario) or custom user
+* Run as `root` (default scenario) or custom user
 * Custom user can have:
   * Custom User ID
   * Custom Group ID
   * Custom username
-  * Custom password
   * Custom home folder (default `/myhome`)
   * Sudo privileges without password
 

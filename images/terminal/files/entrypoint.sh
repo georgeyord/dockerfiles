@@ -32,7 +32,12 @@ if [[ "${USER_ID:-}" != "" ]]; then
 
     echo "Prepare user namespace for user '${USER_NAME}' (${USER_ID}/${GROUP_ID})"
     groupadd -g "${GROUP_ID}" "${USER_NAME}" || true
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+    if [[ "${SUDO_WITHOUT_PASSWORD}" == "true" ]]; then
+      echo "Prepare sudo privileges without password."
+      echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+    fi
+
     useradd --system \
             --create-home \
             --home-dir "${USER_HOME}" \
@@ -41,6 +46,7 @@ if [[ "${USER_ID:-}" != "" ]]; then
             --groups "sudo" \
             --shell "${SHELL}" \
             "${USER_NAME}"
+
     id "${USER_NAME}" -nG
     chown "${USER_ID}:${GROUP_ID}" "${USER_HOME}"
     cd "${USER_HOME}"
@@ -51,7 +57,7 @@ fi
 
 if [ -f /prepare.sh ]; then
   echo "Run prepare script..."
-  /usr/bin/bash /prepare.sh
+  /bin/bash /prepare.sh
 fi
 
 echo "Start GoTTY..."
