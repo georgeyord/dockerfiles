@@ -1,106 +1,49 @@
-FROM debian:latest
-
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-ENV TERM xterm
-ENV DEBIAN_FRONTEND noninteractive
-
-ENV DOCKER_COMPOSE_VERSION 1.28.5
-ENV GOTTY_VERSION 1.0.1
-RUN apt-get update --quiet > /dev/null \
-    && apt-get install --assume-yes -qq \
-      curl \
-      gnupg \
-      software-properties-common \
-    \
-    && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
-    && add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
-    && apt-get update --quiet > /dev/null \
-    && apt-get install --assume-yes -qq \
-      apt-transport-https \
-      ca-certificates \
-      build-essential \
-      byobu \
-      curl \
-      docker-ce \
-      fonts-firacode \
-      git \
-      gcc \
-      gosu \
-      libssl-dev \
-      locales \
-      locales-all \
-      lsb-release \
-      netcat \
-      net-tools \
-      procps \
-      ssh-client \
-      sudo \
-      wget \
-      vim \
-      zsh \
-    \
-    #
-    # GoTTY
-    && curl -sLk https://github.com/yudai/gotty/releases/download/v${GOTTY_VERSION}/gotty_linux_amd64.tar.gz \
-      | tar xzC /usr/local/bin \
-    #
-    # docker-compose
-    && curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" \
-      -o /usr/local/bin/docker-compose \
-    && chmod +x /usr/local/bin/docker-compose \
-    && locale-gen en_US.UTF-8 \
-    #
-    # Clean up
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+# GoTTY terminal with additional DevOps tools
+FROM georgeyord/terminal:latest
 
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+
+# kubectl
+RUN curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+      -o /usr/local/bin/kubectl \
+    && chmod +x /usr/local/bin/kubectl
+
+# aws
+# helm
+# kubectx / kubens
+# python
+# terraform
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - \
     && apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
+    && curl https://baltocdn.com/helm/signing.asc | sudo apt-key add - \
+    && echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list \
     && apt-get update --quiet > /dev/null \
     && apt-get install --assume-yes -qq \
       awscli \
+      helm \
+      kubectx \
       python3-dev \
       python3-setuptools \
       python3-pip \
       python3-yaml \
       terraform \
-    \
-    # gcloud cli
-    && curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz \
-    && mkdir -p /usr/local/gcloud \
-    && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
-    && /usr/local/gcloud/google-cloud-sdk/install.sh \
-    && gcloud version \
-    #
-    # ansible
-    && pip3 install --upgrade pip \
-    && pip3 install ansible \
-    && ansible --version \
     #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-ENV ZSH_IN_DOCKER_VERSION 1.1.1
-ADD ./files/zsh-in-docker.sh /zsh-in-docker.sh
-ADD ./files/setup-zsh.sh /setup-zsh.sh
-RUN chmod +x /*.sh \
-    && /setup-zsh.sh
+# gcloud cli
+RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz \
+    && mkdir -p /usr/local/gcloud \
+    && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
+    && /usr/local/gcloud/google-cloud-sdk/install.sh \
+    && gcloud version
 
-ENV SHELL /bin/zsh
-SHELL ["/bin/zsh", "-c"]
-EXPOSE 8080
+# ansible
+RUN pip3 install --upgrade pip \
+    && pip3 install ansible \
+    && ansible --version
 
-ADD ./files/.gotty /.gotty
-ADD ./files/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-ENV SUDO_WITHOUT_PASSWORD true
-
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD ["/usr/bin/byobu"]
+# k9s
+RUN curl -sS https://webinstall.dev/k9s | bash
